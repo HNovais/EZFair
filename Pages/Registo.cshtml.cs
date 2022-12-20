@@ -11,16 +11,7 @@ namespace EZFair.Pages
 {
     public class RegistoModel : PageModel
     {
-        //private readonly IConfiguration _config;
-
-        //public void MyController(IConfiguration config)
-        //{
-        //    _config = config;
-        //}
-
-        //string connectionString = _config.GetConnectionString("AZURE_SQL_CONNECTION");
-
-        public string ConnectionString { get; set; }
+        SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
         [BindProperty]
         public string Name { get; set; }
@@ -37,19 +28,6 @@ namespace EZFair.Pages
         [BindProperty]
         public string PhoneNumber { get; set; }
 
-        // Construtor do ConnectionString
-        //public void UrlGetter()
-        //{
-        //    var builder = new ConfigurationBuilder()
-        //         .SetBasePath(Directory.GetCurrentDirectory())
-        //         .AddJsonFile("appsettings.json");
-
-        //    var configuration = builder.Build();
-
-        //    string connectionString = configuration.GetConnectionString("AZURE_SQL_CONNECTION");
-        //    this.ConnectionString = connectionString;
-        ////}
-
         public IActionResult OnGet()
         {
             return Page();
@@ -60,114 +38,73 @@ namespace EZFair.Pages
             int id = LastID();
             id++;
 
-            Cliente newCliente = new Cliente(id, Name, Email, Username, Password, PhoneNumber);
-            
-            await RegisterCliente(newCliente);
+            if (UsernameEmUso(Username) == 0)
+            {
+                Cliente newCliente = new Cliente(id, Name, Email, Username, Password, PhoneNumber);
 
+                await RegistarCliente(newCliente);
 
-            return RedirectToPage("Index");
+                return RedirectToPage("Index");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Username já está em uso";
+
+                return null;
+            }
         }
 
-        private async Task RegisterCliente(Cliente cliente)
+        private async Task RegistarCliente(Cliente cliente)
         {
-            //string configJson = File.ReadAllText("appsettings.json");
-            //JObject config = JObject.Parse(configJson);
-            //string connectionString = (string)config["ConnectionStrings"]["AZURE_SQL_CONNECTION"];
+             // Open the connection
+             connection.Open();
 
-            using (SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-            {
-                // Open the connection
-                connection.Open();
+             using (SqlCommand command = new SqlCommand("INSERT INTO Cliente (idCliente, nome, email, username, password, numTelemovel) VALUES (@idCliente, @nome, @email, @username, @password, @numTelemovel)", connection))
+             {
+                // Add the parameters and their values
+                command.Parameters.AddWithValue("@idCliente", cliente.idCliente);
+                command.Parameters.AddWithValue("@nome", cliente.nome);
+                command.Parameters.AddWithValue("@email", cliente.email);
+                command.Parameters.AddWithValue("@username", cliente.username);
+                command.Parameters.AddWithValue("@password", cliente.password);
+                command.Parameters.AddWithValue("@numTelemovel", cliente.numTelemovel);
 
-                using (SqlCommand command = new SqlCommand("INSERT INTO Cliente (idCliente, nome, email, username, password, numTelemovel) VALUES (@idCliente, @nome, @email, @username, @password, @numTelemovel)", connection))
-                {
-                    // Add the parameters and their values
-                    command.Parameters.AddWithValue("@idCliente", cliente.idCliente);
-                    command.Parameters.AddWithValue("@nome", cliente.nome);
-                    command.Parameters.AddWithValue("@email", cliente.email);
-                    command.Parameters.AddWithValue("@username", cliente.username);
-                    command.Parameters.AddWithValue("@password", cliente.password);
-                    command.Parameters.AddWithValue("@numTelemovel", cliente.numTelemovel);
+                // Open the connection and execute the query
+                command.ExecuteNonQuery();
+             }
 
-                    // Open the connection and execute the query
-                    command.ExecuteNonQuery();
-                    Console.WriteLine("Done");
-                }
-
-                connection.Close();
-            }
+             connection.Close();
         }
 
         private int LastID() 
         {
-            using (SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-            {
-                // Open the connection
-                connection.Open();
+            // Open the connection
+            connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT MAX(idCliente) AS LastID FROM Cliente;", connection))
-                {
-                    int lastId = Convert.ToInt32(command.ExecuteScalar());
-                    connection.Close();
-                    return lastId;
-                }  
+            using (SqlCommand command = new SqlCommand("SELECT MAX(idCliente) AS LastID FROM Cliente;", connection))
+            {
+                int lastId = Convert.ToInt32(command.ExecuteScalar());
+                connection.Close();
+                return lastId;
+            }      
+        }
+
+        private int UsernameEmUso(string username)
+        {
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand("SELECT CASE WHEN EXISTS (SELECT * FROM Cliente WHERE username = @username) THEN 1 ELSE 0 END;", connection))
+            {
+                command.Parameters.AddWithValue("@username", username);
+                
+                int response = Convert.ToInt32(command.ExecuteScalar());
+
+                connection.Close();
+
+                return response;
             }
         }
 
-        /*
-        public void test(string nome, string password)
-        {
-            string newNome = nome;
-            string newPassword = password;
-
-            Console.WriteLine(newPassword);
-        }
-        public string saveUserInformation(Cliente cliente)
-        {
-            // Store the form data in the model class
-            // You can access the form data using the properties of the model class,
-            // such as model.Name, model.Username, model.Email, etc.
-
-            // You can then save the data to a database, for example, or perform some other action with it
-
-            using (SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-            {
-                // Open the connection
-                connection.Open();
-
-                // Create a command to execute the query
-                SqlCommand command = new SqlCommand("INSERT INTO Cliente (idCliente, nome, email, username, password, numTelemovel)\r\nVALUES (5, {cliente.nome}, {cliente.email}, {cliente.username}, {cliente.password},{cliente.phone})\r\n", connection);
-
-                command.ExecuteNonQuery();
-
-            }
-
-            return "nothing";
-        }
-
-        private System.Web.Mvc.ActionResult View()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string getCliente()
-        {
-            using (SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-            {
-                // Open the connection
-                connection.Open();
-
-                string sql = "SELECT * FROM cliente WHERE id = 5";
-                SqlCommand command = new SqlCommand(sql, connection);
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-
-                    reader.Read();
-
-                    return reader.GetString(3);
-                }
-            }
-        }*/
+        
     }
 }
