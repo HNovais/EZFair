@@ -5,7 +5,7 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<form method="POST">
+<form asp-asp-page-handler="input" method="POST">
       <label for="Nome">Nome:</label><br>
       <input type="text" id="nome" name="nome"><br>
       <label for="username">Username:</label><br>
@@ -19,5 +19,5 @@
       <input type="submit" value="Submit">
 </form>
 <form>
-    <input type="submit" value="Cliente", onclick="EZFair.Pages.RegistoModel.test('username', 'password')"/>
+    <input type="submit" value="Cliente", onclick="EZFair.Pages.RegistoModel.test()"/>
 </form>
