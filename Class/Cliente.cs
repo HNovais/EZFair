@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Azure.Identity;
+using Microsoft.Extensions.Primitives;
+using System.ComponentModel.DataAnnotations;
 
 namespace EZFair.Class
 {
@@ -10,5 +12,17 @@ namespace EZFair.Class
         public string username { get; set;}
         public string password { get; set;}
         public string numTelemovel { get; set;}
+
+        public Cliente(int idCliente, string nome, string email, string username, string password, string numTelemovel)
+        {
+            this.idCliente = idCliente;
+            this.nome = nome;
+            this.email = email;
+            this.username = username;
+            this.password = password;
+            this.numTelemovel = numTelemovel;
+        }
     }
+
+    
 }

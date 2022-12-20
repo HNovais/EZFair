@@ -4,8 +4,41 @@
     ViewData["Title"] = "Registo";
 }
 
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Username">Username</label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber">PhoneNumber</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Log In</button>
+}
+
+
+<!--
 <h1>@ViewData["Title"]</h1>
-<form asp-asp-page-handler="input" method="POST">
+<form asp-asp-page-handler="button" method="POST">
       <label for="Nome">Nome:</label><br>
       <input type="text" id="nome" name="nome"><br>
       <label for="username">Username:</label><br>
@@ -16,8 +49,9 @@
       <input type="password" id="password" name="password"><br>
       <label for="phone">Phone:</label><br>
       <input type="text" id="phone" name="phone"><br><br>
-      <input type="submit" value="Submit">
+      <button class="submit">Submit</button>
 </form>
 <form>
     <input type="submit" value="Cliente", onclick="EZFair.Pages.RegistoModel.test()"/>
 </form>
+-->
