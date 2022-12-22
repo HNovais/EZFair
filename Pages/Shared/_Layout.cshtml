@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EZFair.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/css/layout.css">
 </head>
 <body>
-    <header>
+    <!--
+    <header style="background-color: #292929; color: #EBEBEB">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">EZFair</a>
@@ -32,14 +35,59 @@
                 </div>
             </div>
         </nav>
+        </header>
+        <header>
+
+        <div id="container">
+
+            <a href="#"><img src="~/Images/logo.png" alt="Homepage" title="Homepage" border="0" style=" height: 90px; float: left; margin-left: 40px;"></a>
+            <div id="searchbar">
+                <img src="~/Images/search.png" id="searchlogo" /><form method="get" action="https://www.google.com/search%22%3E
+                        <input type="text" name="test" size="31" value="" autocomplete="false" autofocus="no" id="searchbar2" placeholder="Pesquisa"></form>
+            </div>
+            <div id="account">
+                <img src="~/Images/account.png" />
+            </div>
+        </div>
+
+    </header> 
+    -->
+    <header style="background-color: #292929; color: #EBEBEB">
+        <div id="container">
+            <a href="#">
+                <img src="~/Images/logo.png" alt="Homepage" title="Homepage" class="ezfair" border="0" style="height: 90px; float: left; margin-left: 40px; margin-right: 40px;">
+            </a>
+            <!--<div id="search-container" style="display: flex; justify-content: center;">
+                <div id="searchbar">
+                    <form method="get" action="https://www.google.com/search">
+                        <input type="text" name="test" size="31" value="" autocomplete="false" autofocus="no" id="searchbar" placeholder="Pesquisa">
+                        <button type="submit" style="background: none; border: none;"><img src="~/Images/search.png" id="searchlogo" style="width: 50px; height: 50px;"></button>
+                    </form>
+                </div>
+                        </div>-->
+            <div id="search-container">
+                <div id="searchbar">
+                    <input type="text" class="searchterm" placeholder="Pesquisar feira">
+                    <button type="submit" style="background: none; border: none;">
+                        <img src="~/Images/search.png" alt="Search" class="searchicon">
+                    </button>
+                </div>
+            </div><!--
+            <div id="account">
+                <img src="~/Images/account.png" id="account" style="width: 50px; height: 50px;">
+                        </div>-->
+        </div>
     </header>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color: #292929; color: #EBEBEB">
         <div class="container">
             &copy; 2022 - EZFair - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

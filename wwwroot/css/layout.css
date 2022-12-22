@@ -1,0 +1,50 @@
+﻿#container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    padding: 10px;
+}
+
+.ezfair{
+    margin: auto;
+}
+
+#search-container {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.searchbar {
+    width: 90%;
+    height: 35px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchterm {
+    width: 90%;
+    border: 3px solid #DEA402;
+    border-right: none;
+    padding: 5px;
+    height: 35px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #474747;
+}
+
+.searchicon {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #DEA402;
+    background: #DEA402;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
