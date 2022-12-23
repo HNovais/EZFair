@@ -1,35 +1,39 @@
 ﻿#container {
     display: flex;
     align-items: center;
+    position: relative;
     width: 100%;
-    height: 15%;
     padding: 10px;
+    justify-content: space-between;
 }
 
-.ezfair{
-    margin: auto;
+.ezfair {
+    float: left;
+    height: 100%;
 }
 
-#search-container {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
+.account {
+    float: right;
+    height: 100%;
 }
 
 .searchbar {
-    width: 90%;
-    height: 35px;
-    position: relative;
     display: flex;
     align-items: center;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    width: 70%;
+    height: 100%;
+    justify-content: space-between; 
 }
 
 .searchterm {
-    width: 90%;
+    width: 80%; 
     border: 3px solid #DEA402;
     border-right: none;
     padding: 5px;
-    height: 35px;
+    height: 100%;
     border-radius: 5px 0 0 5px;
     outline: none;
     color: #474747;
@@ -37,14 +41,11 @@
 
 .searchicon {
     width: 35px;
-    height: 35px;
+    height: 100%;
     border: 1px solid #DEA402;
     background: #DEA402;
     text-align: center;
-    color: #fff;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     font-size: 20px;
 }
-
-
