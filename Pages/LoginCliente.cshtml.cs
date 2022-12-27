@@ -41,7 +41,7 @@ namespace EZFair.Pages
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
                 // Redirect to the protected resource or the home page
-                return RedirectToAction("Index", "Home");
+                return Redirect("/");
             }
             else
             {
