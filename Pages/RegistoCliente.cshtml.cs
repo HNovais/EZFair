@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EZFair.Pages
 {
-    public class RegistoModel : PageModel
+    public class RegistoCliente: PageModel
     {
         SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 

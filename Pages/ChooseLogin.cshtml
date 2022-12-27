@@ -1,0 +1,55 @@
+﻿@page
+@model EZFair.Pages.ChooseLogin
+@{
+    ViewData["Title"] = "ChooseLogin";
+}
+
+<style>
+    body {
+        background-color: #121212;
+    }
+
+    .login-options {
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+    }
+
+    .login-option {
+        width: 600px;
+        height: 300px;
+        background-color: #DEA402;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 76px;
+        cursor: pointer;
+        margin: 30px 70px;
+        position: relative;
+    }
+
+    .login-option:before {
+        content: "";
+        position: absolute;       
+        top: -200px;
+        left: -100px;
+        right: -100px;
+        bottom: -200px;
+        background-color: #292929;
+        z-index: -1;
+        }
+    </style>
+
+<form method="post">
+    <div class="login-options">
+        <div class="login-option">
+            <input type="radio" id="empresa" name="tipo" value="empresa" style="display: none;">
+            <label for="empresa">Empresa</label>
+        </div>
+        <div class="login-option">
+            <input type="radio" id="cliente" name="tipo" value="cliente" style="display: none;">
+            <a href="@Url.Content("~/LoginCliente")" class="btn btn-primary"></a>
+            <label for="cliente">Cliente</label>
+        </div>
+    </div>
+</form>
