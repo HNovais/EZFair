@@ -19,6 +19,7 @@ namespace EZFair.Pages
 
         [BindProperty]
         public string Password { get; set; }
+        
 
         public IActionResult OnGet()
         {

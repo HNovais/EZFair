@@ -1,0 +1,26 @@
+﻿@page
+@model EZFair.Pages.CriarFeiraModel
+@{
+    ViewData["Title"] = "Criar Feira";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label asp-for="Nome">Nome</label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataInicio">Data Início</label>
+        <input asp-for="DataInicio" type="date" class="form-control" value="2023-01-01" />
+        <span asp-validation-for="DataInicio" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataFinal">Data Final</label>
+        <input asp-for="DataFinal" type="date" class="form-control" value="2023-01-31" />
+        <span asp-validation-for="DataFinal" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Criar</button>
+}

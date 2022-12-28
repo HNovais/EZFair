@@ -59,7 +59,7 @@ namespace EZFair.Pages
              // Open the connection
              connection.Open();
 
-             using (SqlCommand command = new SqlCommand("INSERT INTO Cliente (idCliente, nome, email, username, password, numTelemovel) VALUES (@idCliente, @nome, @email, @username, @password, @numTelemovel)", connection))
+             using (SqlCommand command = new SqlCommand("INSERT INTO Cliente (idCliente, nome, email, username, password, numTelemovel, autorizacao) VALUES (@idCliente, @nome, @email, @username, @password, @numTelemovel, 1)", connection))
              {
                 // Add the parameters and their values
                 command.Parameters.AddWithValue("@idCliente", cliente.idCliente);
