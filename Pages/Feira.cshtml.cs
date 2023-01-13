@@ -36,20 +36,30 @@ namespace EZFair.Pages
                         this.inicio = reader.GetDateTime(1);
                         this.final = reader.GetDateTime(2);
                     }
-
+                    
                     feira = new Feira(idEmpresa, nomeFeira, inicio, final);
+                    reader.Close();
 
-                    using (SqlCommand command2 = new SqlCommand("SELECT nomeEmpresa FROM Empresa WHERE idEmpresa = @idEmpresa", connection)) // ESTA PARTE NÂO FUNCIONA
+                    using (SqlCommand command2 = new SqlCommand("SELECT nomeEmpresa FROM Empresa WHERE idEmpresa = @idEmpresa", connection))
                     {
                         command2.Parameters.AddWithValue("@idEmpresa", idEmpresa);
-
-                        if (reader.Read())
+                        using (SqlDataReader reader2 = command2.ExecuteReader())
                         {
-                            this.empresa = reader.GetString(0);
+                            if (reader2.Read())
+                            {
+                                this.empresa = reader2.GetString(0);
+                            }
                         }
                     }
                 }
             }
+        }
+
+        public IActionResult AdicionarProduto()
+        {
+            // Realizar as operações de registro aqui.
+
+            return RedirectToAction("Index");
         }
     }
 }
