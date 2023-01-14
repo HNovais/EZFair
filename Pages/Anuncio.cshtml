@@ -1,14 +1,15 @@
 ﻿@page "/Feira/{nomeFeira}/{idProduto}"
 @model EZFair.Pages.AnuncioModel
 @{
+}
 
+<h1>@AnuncioModel.nome</h1>
 
-<h1>@Model.nome</h1>
-
-<p>Preço: @Model.preco</p>
+<p>Preço: @AnuncioModel.preco</p>
 <p>Descrição do produto: @Model.descricao</p>
 
-<form action="/EZFair.Pages/FeiraModel/Comprar" method="post">
-    <button type="submit" asp-page-handler="Produto">Comprar</button>
+<form method="post">
+    <button type="submit" class="btn btn-primary" asp-page-handler="Comprar">Comprar</button>
 </form>
-}
+
+
