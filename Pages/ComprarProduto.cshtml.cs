@@ -10,15 +10,15 @@ namespace EZFair.Pages
     {
         SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
-        private static int idProduto;
-        private static string nomeFeira;
-        private static Produto produto { get; set; }
+        private static int produto;
+        private static string feira;
+        private static Produto prod{ get; set; }
 
-        public void OnGet(string feira, int produto)
+        public void OnGet(string nomeFeira, int idProduto)
         {
-            ComprarProdutoModel.nomeFeira = feira;
-            ComprarProdutoModel.idProduto = produto;
-
+            ComprarProdutoModel.feira = nomeFeira;
+            ComprarProdutoModel.produto = idProduto;
+            Console.WriteLine(nomeFeira + idProduto);
             getProduto();
         }
 
@@ -32,7 +32,7 @@ namespace EZFair.Pages
 
                 // First query
                 command.CommandText = "SELECT stock, preco, nomeProduto FROM Produto WHERE idProduto = @idProduto";
-                command.Parameters.AddWithValue("@idProduto", idProduto);
+                command.Parameters.AddWithValue("@idProduto", produto);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -42,7 +42,7 @@ namespace EZFair.Pages
                         float preco = (float)temp;
                         string nomeProduto = reader.GetString(2);
 
-                        produto = new Produto(idProduto, stock, preco, nomeProduto);
+                        prod = new Produto(produto, stock, preco, nomeProduto);
                     }
                 }
             }
@@ -66,12 +66,12 @@ namespace EZFair.Pages
 
                 // First query
                 command.CommandText = "DELETE FROM Anuncio WHERE produto = @idProduto;";
-                command.Parameters.AddWithValue("@idProduto", idProduto);
+                command.Parameters.AddWithValue("@idProduto", produto);
                 command.ExecuteNonQuery(); 
 
                 // Second query
                 command.CommandText = "DELETE FROM Produto WHERE idProduto = @prod;";
-                command.Parameters.AddWithValue("@prod", idProduto);
+                command.Parameters.AddWithValue("@prod", produto);
                 command.ExecuteNonQuery();
             }
 

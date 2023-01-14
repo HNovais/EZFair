@@ -13,9 +13,6 @@ namespace EZFair.Pages
         public string descricao { get; set; }
         public static int produto { get; set; } 
         public static string nome { get; set; }
-        // bytes de images
-        
-
         public static float preco { get; set; }
 
         private static string feira;
@@ -26,7 +23,7 @@ namespace EZFair.Pages
 
             getProduto();
         }
-       
+
         private void getProduto()
         {
             connection.Open();
@@ -62,26 +59,11 @@ namespace EZFair.Pages
             connection.Close();
 
         }
-        /*
-        private void putImage()
-        {
-            //string connectionString = "Data Source=(local);Initial Catalog=myDB;Integrated Security=True;";
-            byte[] imageData = File.ReadAllBytes("Data/Images/my-nba-all-stars-picks-story.png");
-            using (SqlCommand command = new SqlCommand())
-            {
-                command.Connection = connection;
 
-                command.CommandText = "INSERT INTO Images (ImageData) VALUES (@imageData)";
-                //var command = new SqlCommand(query, connection);
-                command.Parameters.Add("@imageData", imageData);
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-        }
-        */
         public IActionResult OnPostComprar()
         {
-            return RedirectToPage("ComprarProduto", new { feira, produto });
+            Console.WriteLine(feira + produto);
+            return RedirectToPage("ComprarProduto", new { nomeFeira = feira, idProduto = produto });
         }
     }
 }
