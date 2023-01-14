@@ -4,23 +4,49 @@
     ViewData["Title"] = "Criar Feira";
 }
 
+<style>
+    body {
+        background-color: #121212;
+    }
+</style>
+
 @using (Html.BeginForm())
 {
+    <br>
+    <br>
+    <div style="text-align: center; color: #DEA402; font-size: 4em; text-shadow: 1px 1px 0px white;">Criar Feira</div>
+    <br>
     <div class="form-group">
-        <label asp-for="Nome">Nome</label>
-        <input asp-for="Nome" class="form-control" />
+        <label asp-for="Nome" style="color:white; margin-left: 50px;">Nome da Feira</label>
+        <input asp-for="Nome" class="form-control" style="margin-left: 50px;" />
         <span asp-validation-for="Nome" class="text-danger"></span>
+        <br>
+        <br>
     </div>
     <div class="form-group">
-        <label asp-for="DataInicio">Data Início</label>
-        <input asp-for="DataInicio" type="date" class="form-control" value="2023-01-01" />
+        <label asp-for="DataInicio" style="color:white; margin-left: 50px;">Data de Início</label>
+        <input asp-for="DataInicio" type="date" class="form-control" value="2023-01-01" style="margin-left: 50px;" />
         <span asp-validation-for="DataInicio" class="text-danger"></span>
+        <br>
+        <br>
     </div>
     <div class="form-group">
-        <label asp-for="DataFinal">Data Final</label>
-        <input asp-for="DataFinal" type="date" class="form-control" value="2023-01-31" />
+        <label asp-for="DataFinal" style="color:white; margin-left: 50px;">Data do Fim</label>
+        <input asp-for="DataFinal" type="date" class="form-control" value="2023-01-31" style="margin-left: 50px;" />
         <span asp-validation-for="DataFinal" class="text-danger"></span>
+        <br>
+        <br>
     </div>
-
-    <button type="submit" class="btn btn-primary">Criar</button>
+    <br>
+    <div style="text-align:center;">
+        <button type="submit" class="button btn btn-primary" style="background-color: #DEA402;
+                                                                color: white;
+                                                                padding: 15px 15px;
+                                                                text-decoration: none;
+                                                                display: inline-block;
+                                                                font-size: 35px;
+                                                                margin: 4px 2px;
+                                                                border: 1px solid white;
+                                                                cursor: pointer;">CRIAR</button>
+    </div>
 }
