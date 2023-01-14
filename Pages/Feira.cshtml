@@ -11,3 +11,14 @@
 <form method="post">
     <button type="submit" class="btn btn-primary" asp-page-handler="AdicionarProduto">Adicionar produto</button>
 </form>
+
+<ul>
+    @foreach (var produto in FeiraModel.produtos)
+    {
+        <li>
+            <h2>@produto.nomeProduto</h2>
+            <p>@produto.preco</p>
+            <button onclick="location.href='/Feira/@FeiraModel.nomeFeira/idProduto=@produto.idProduto'">Produto</button>
+        </li>
+    }
+</ul>

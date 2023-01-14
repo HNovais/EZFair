@@ -20,7 +20,15 @@ namespace EZFair.Pages
 
         public Feira feira;
         
+        public static List<Produto> produtos = new List<Produto>();
+
         public void OnGet(string nomeFeira)
+        {
+            getFeira(nomeFeira);
+            getAnuncios();
+        }
+
+        private void getFeira(string nomeFeira)
         {
             connection.Open();
 
@@ -65,6 +73,34 @@ namespace EZFair.Pages
 
             connection.Close();
         }
+
+        private void getAnuncios()
+        {
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = connection;
+
+                command.CommandText = "SELECT idProduto, stock, preco, nomeProduto FROM Produto";
+                command.ExecuteNonQuery();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int idProduto = reader.GetInt32(0);
+                        int stock = reader.GetInt32(1);
+                        double temp = reader.GetDouble(2);
+                        float preco = (float)temp;
+                        string nomeProduto = reader.GetString(3);
+
+                        Produto newProduto = new Produto(idProduto, stock, preco, nomeProduto);
+                        produtos.Add(newProduto);
+                    }
+                }
+            }
+        }
+
         [HttpPost]
         public IActionResult OnPostAdicionarProduto()
         {

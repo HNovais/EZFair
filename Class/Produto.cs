@@ -13,5 +13,13 @@
             this.preco = preco;
             this.nomeProduto = nomeProduto;
         }
+
+        public Produto(int idProduto, int stock, float preco, string nomeProduto)
+        {
+            this.idProduto = idProduto;
+            this.stock = stock;
+            this.preco = preco;
+            this.nomeProduto = nomeProduto;
+        }
     }
 }
