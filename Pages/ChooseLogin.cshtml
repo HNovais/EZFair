@@ -38,19 +38,38 @@
         background-color: #292929;
         z-index: -1;
         }
+
+    .push-down {
+        padding-top: 100px;
+    }
+    h1{
+        color: white;
+        font-size: 60px;
+        padding-top: 200px;
+        text-align: center;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+    }
     </style>
 
+    <div class="push-down">
+<h1 style="color: #DEA402; text-shadow: 1px 1px 0px white;">Modo de Autenticação</h1>
+
 <form method="post">
-    <div class="login-options">
-        <div class="login-option">
-            <input type="radio" id="empresa" name="tipo" value="empresa" style="display: none;">
-            <a href="@Url.Content("~/LoginEmpresa")" class="btn btn-primary" style="font-size:50px;">
-    <label for="empresa" onclick="redirectToLoginEmpresa()">Empresa</label>
+
+<div class="login-options">
+    <div class="login-option">
+        <input type="radio" id="empresa" name="tipo" value="empresa" style="display: none;">
+        <a href="@Url.Content("~/LoginEmpresa")" class="btn btn-primary" style="font-size:60px; color: white; text-shadow: 1px 1px 0px white;">
+<label for="empresa" onclick="redirectToLoginEmpresa()">Empresa</label>
 </a>
         </div>
         <div class="login-option">
             <input type="radio" id="cliente" name="tipo" value="cliente" style="display: none;">
-            <a href="@Url.Content("~/LoginCliente")" class="btn btn-primary" style="font-size:50px;">
+            <a href="@Url.Content("~/LoginCliente")" class="btn btn-primary" style="font-size:60px; color: white; text-shadow: 1px 1px 0px white;">
                 <label for="cliente" onclick="redirectToLoginCliente()">Cliente</label>
             </a>
         </div>
@@ -68,4 +87,3 @@
 
    
 </form>
-

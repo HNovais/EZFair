@@ -50,9 +50,9 @@
             </div>
         </div>
 
-    </header> 
+    </header>
     -->
-    <header style="background-color: #292929; color: #EBEBEB">
+    <header style="background-color: #292929; color: #EBEBEB; border-bottom: 2.5px solid white;">
         <div id="container">
             <a href="@Url.Content("~/")" class="btn btn-primary">
                 <img src="~/Images/logo.png" alt="Homepage" title="Homepage" class="ezfair" border="0" style="height: 90px; float: left; margin-left: 40px; margin-right: 40px;">
@@ -61,11 +61,18 @@
                 <input type="text" class="searchterm" placeholder="Pesquisar feira">
                 <img src="~/Images/search.png" alt="Search" class="searchicon">
             </div>
+
             <div id="account">
                 <a href="@Url.Content("~/ChooseLogin")" class="btn btn-primary">
                     <img src="~/Images/account.png" class="account" style="width: 50px; height: 50px; margin-left: 40px; margin-right: 40px;">
                 </a>
             </div>
+            <div id="hide">
+                <a href="#">Registo</a><br>
+
+                <a href="#">Login</a>
+            </div>
+
         </div>
     </header>
 
@@ -75,20 +82,20 @@
         </main>
     </div>
 
-<footer class="footer" style="background-color: #292929; color: #FFFFFF;">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <p>&copy; 2023 - EZFair</p>
-            </div>
-            <div class="col-md-6">
-                <p style="text-align: right;">
+    <footer class="footer" style="background-color: #292929; color: #FFFFFF; border-top: 2.5px solid white;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p>&copy; 2023 - EZFair</p>
+                </div>
+                <div class="col-md-6">
+                    <p style="text-align: right;">
                         <a href="/Privacy" style="color: #FFFFFF;">Política de Privacidade</a>
-                </p>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
