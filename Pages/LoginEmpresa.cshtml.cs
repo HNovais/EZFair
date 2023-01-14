@@ -30,10 +30,10 @@ namespace EZFair.Pages
 
             if (isValid)
             {
-                // Create an authenticated identity
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, Username));
                 identity.AddClaim(new Claim(ClaimTypes.Name, Username));
+                identity.AddClaim(new Claim(ClaimTypes.Role, "Empresa"));
 
                 // Set the forms authentication ticket
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));

@@ -37,6 +37,7 @@ namespace EZFair.Pages
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, Username));
                 identity.AddClaim(new Claim(ClaimTypes.Name, Username));
+                identity.AddClaim(new Claim(ClaimTypes.Role, "Cliente"));
 
                 // Set the forms authentication ticket
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
@@ -51,9 +52,10 @@ namespace EZFair.Pages
                 return Page();
             }
         }
-
-        private bool ValidarCredenciais(string Username, string Password)
-        {
+        
+        private bool ValidarCredenciais(string Username, string Password) 
+        { 
+        
             connection.Open();
 
             using (SqlCommand command = new SqlCommand("SELECT * FROM Cliente WHERE username = @username AND password = @password", connection))

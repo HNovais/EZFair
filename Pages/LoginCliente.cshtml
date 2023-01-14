@@ -18,4 +18,11 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Login</button>
+
+    @if (ModelState.ErrorCount > 0)
+    {
+        <div class="alert alert-danger">
+            <p>Invalid username or password.</p>
+        </div>
+    }
 }

@@ -1,11 +1,14 @@
 using EZFair.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace EZFair.Pages
 {
+    [Authorize(Roles = "Cliente")]
     public class AnuncioModel : PageModel
     {
 
@@ -62,7 +65,6 @@ namespace EZFair.Pages
 
         public IActionResult OnPostComprar()
         {
-            Console.WriteLine(feira + produto);
             return RedirectToPage("ComprarProduto", new { nomeFeira = feira, idProduto = produto });
         }
     }
