@@ -29,6 +29,5 @@
             this.dataInicio = inicio;
             this.dataFinal = final;
         }
-
     }
 }

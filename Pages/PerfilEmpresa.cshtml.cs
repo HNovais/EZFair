@@ -1,3 +1,4 @@
+using EZFair.Class;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -28,6 +29,12 @@ namespace EZFair.Pages
                     }
                 }
             }
+        }
+
+        [HttpPost]
+        public IActionResult OnPostCriarFeira()
+        {
+            return RedirectToPage("CriarFeira");
         }
     }
 }
