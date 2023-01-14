@@ -4,6 +4,15 @@
     ViewData["Title"] = "Login Empresa";
 }
 
+<h1>Empresa</h1>
+
+<style>
+    .move-down {
+        position: relative;
+        top: 50px;
+    }
+</style>
+
 @using (Html.BeginForm())
 {
     <div class="form-group">
@@ -17,5 +26,5 @@
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary move-down">Login</button>
 }

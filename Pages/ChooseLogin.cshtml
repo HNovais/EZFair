@@ -44,13 +44,28 @@
     <div class="login-options">
         <div class="login-option">
             <input type="radio" id="empresa" name="tipo" value="empresa" style="display: none;">
-            <a href="@Url.Content("~/LoginEmpresa")" class="btn btn-primary"></a>
-            <label for="empresa">Empresa</label>
+            <a href="@Url.Content("~/LoginEmpresa")" class="btn btn-primary" style="font-size:50px;">
+    <label for="empresa" onclick="redirectToLoginEmpresa()">Empresa</label>
+</a>
         </div>
         <div class="login-option">
             <input type="radio" id="cliente" name="tipo" value="cliente" style="display: none;">
-            <a href="@Url.Content("~/LoginCliente")" class="btn btn-primary"></a>
-            <label for="cliente">Cliente</label>
+            <a href="@Url.Content("~/LoginCliente")" class="btn btn-primary" style="font-size:50px;">
+                <label for="cliente" onclick="redirectToLoginCliente()">Cliente</label>
+            </a>
         </div>
     </div>
+
+ 
+   <script>
+        function redirectToLoginCliente(){
+            window.location.href = "@Url.Content("~/LoginCliente")";
+        }
+        function redirectToLoginEmpresa() {
+            window.location.href = "@Url.Content("~/LoginEmpresa")";
+        }
+    </script>
+
+   
 </form>
+
