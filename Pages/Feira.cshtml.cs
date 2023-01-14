@@ -11,8 +11,8 @@ namespace EZFair.Pages
     {
         SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
-        private int idFeira;
-        public string nomeFeira { get; set; }
+        private static int idFeira;
+        public static string nomeFeira { get; set; }
         public string empresa { get; set; }
         private int idEmpresa { get; set; }
         public DateTime inicio { get; set; }
@@ -24,20 +24,23 @@ namespace EZFair.Pages
         {
             connection.Open();
 
-            using (SqlCommand command = new SqlCommand("SELECT empresa, dataInicio, dataFim FROM Feira WHERE nomeFeira = @nomeFeira", connection))
+            using (SqlCommand command = new SqlCommand())
             {
-                command.Parameters.AddWithValue("@nomeFeira", nomeFeira);
+                command.Connection = connection;
 
+                // First query
+                command.CommandText = "SELECT empresa, dataInicio, dataFim FROM Feira WHERE nomeFeira = @nomeFeira";
+                command.Parameters.AddWithValue("@nomeFeira", nomeFeira);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
                         this.idEmpresa = reader.GetInt32(0);
-                        this.nomeFeira = nomeFeira;
+                        FeiraModel.nomeFeira = nomeFeira;
                         this.inicio = reader.GetDateTime(1);
                         this.final = reader.GetDateTime(2);
                     }
-                    
+
                     feira = new Feira(idEmpresa, nomeFeira, inicio, final);
                     reader.Close();
 
@@ -53,14 +56,19 @@ namespace EZFair.Pages
                         }
                     }
                 }
+
+                // Second query
+                command.CommandText = "SELECT idFeira FROM Feira WHERE nomeFeira = @nome";
+                command.Parameters.AddWithValue("@nome", nomeFeira);
+                FeiraModel.idFeira = (int)command.ExecuteScalar();
             }
+
+            connection.Close();
         }
-
-        public IActionResult AdicionarProduto()
+        [HttpPost]
+        public IActionResult OnPostAdicionarProduto()
         {
-            // Realizar as operações de registro aqui.
-
-            return RedirectToAction("/Feira" + nomeFeira + "/AdicionarProduto", nomeFeira, idFeira);
+            return RedirectToPage("AdicionarProduto", new { nomeFeira, idFeira });
         }
     }
 }

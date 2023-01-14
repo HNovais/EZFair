@@ -19,13 +19,13 @@ namespace EZFair.Pages
         [BindProperty]
         public string Name { get; set; }
 
-        public string nomeFeira;
-        private int idFeira;
+        public static string nomeFeira;
+        private static int idFeira;
 
         public IActionResult OnGet(string nomeFeira, int idFeira)
         {
-            this.idFeira = idFeira;
-            this.nomeFeira = nomeFeira;
+            AdicionarProdutoModel.idFeira = idFeira;
+            AdicionarProdutoModel.nomeFeira = nomeFeira;
             return Page();
         }
 
@@ -35,7 +35,7 @@ namespace EZFair.Pages
 
             int idProduto = AdicionarProduto(produto, idFeira);
 
-            return RedirectToPage("/Feira/" + nomeFeira + "/" + idProduto);
+            return RedirectToPage("Anuncio", new { nomeFeira, idProduto });
         }
 
         private int AdicionarProduto(Produto produto, int idFeira)
@@ -55,10 +55,13 @@ namespace EZFair.Pages
                 command.ExecuteNonQuery();
 
                 // Second query
-                command.CommandText = "SELECT IDENT_CURRENT('Produto')\r\n";
-                idProduto = (int)command.ExecuteScalar();
+                command.CommandText = "SELECT IDENT_CURRENT('Produto')";
+                decimal tempIdProduto = (decimal)command.ExecuteScalar();
+                idProduto = Convert.ToInt32(tempIdProduto);
 
-                Anuncio anuncio = new Anuncio(idProduto, idFeira);
+                Anuncio anuncio = new Anuncio(idProduto, AdicionarProdutoModel.idFeira);
+
+                Console.WriteLine(anuncio.feira);
 
                 //Third query
                 command.CommandText = "INSERT INTO Anuncio (produto, feira) VALUES (@produto, @feira)";

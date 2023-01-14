@@ -3,11 +3,11 @@
 @{
 }
 
-<h1>@Model.nomeFeira</h1>
+<h1>@FeiraModel.nomeFeira</h1>
 <p>Empresa: @Model.empresa</p>
 <p>Data de Início: @Model.inicio.ToString("dd/MM/yyyy")</p>
 <p>Data de Fim: @Model.final.ToString("dd/MM/yyyy")</p>
 
-<form action="/EZFair.Pages/FeiraModel/AdicionarProduto" method="post">
-    <button type="submit" asp-page-handler="Produto">Adicionar produto</button>
+<form method="post">
+    <button type="submit" class="btn btn-primary" asp-page-handler="AdicionarProduto">Adicionar produto</button>
 </form>
