@@ -20,6 +20,7 @@ namespace EZFair.Pages
 
         public void OnGet()
         {
+            feiras.Clear();
             getFeiras();
         }
 

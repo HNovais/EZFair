@@ -24,6 +24,7 @@ namespace EZFair.Pages
 
         public void OnGet(string nomeFeira)
         {
+            produtos.Clear();
             getFeira(nomeFeira);
             getAnuncios();
         }
@@ -82,7 +83,8 @@ namespace EZFair.Pages
             {
                 command.Connection = connection;
 
-                command.CommandText = "SELECT idProduto, stock, preco, nomeProduto FROM Produto";
+                command.CommandText = "SELECT Produto.*\r\nFROM Feira\r\nJOIN Anuncio ON Feira.idFeira = Anuncio.feira\r\nJOIN Produto ON Anuncio.produto = Produto.idProduto\r\nWHERE Feira.idFeira = @idFeira";
+                command.Parameters.AddWithValue("@idFeira", idFeira);
                 command.ExecuteNonQuery();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
