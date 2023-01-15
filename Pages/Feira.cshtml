@@ -6,21 +6,32 @@
 <br>
 <h1 style="text-align: center; color: #DEA402; font-size: 4em; text-shadow: 1px 1px 0px white;">@FeiraModel.nomeFeira</h1>
 <br>
-<p style="color: white">  Empresa: @Model.empresa</p>
-<p style="color: white">  Data de Início: @Model.inicio.ToString("dd/MM/yyyy")</p>
-<p style="color: white">  Data de Fim: @Model.final.ToString("dd/MM/yyyy")</p>
+<br>
+<div style="display: flex;">
+    <p style="color: white; margin-right: 350px; font-size: 1.5em;">Criador: @Model.empresa</p>
+    <p style="color: white; margin-right: 250px; font-size: 1.5em;">Data de Início: @Model.inicio.ToString("dd/MM/yyyy")</p>
+    <p style="color: white; font-size: 1.5em;">Data de Fim: @Model.final.ToString("dd/MM/yyyy")</p>
+</div>
+<br>
 
-<ul>
+<ul style="color: white; display: flex; flex-wrap: nowrap; list-style-type: none;">
     @foreach (var produto in FeiraModel.produtos)
     {
-        <li>
+        <li style="margin-right:50px">
             <h2>@produto.nomeProduto</h2>
-            <p>@produto.preco</p>
-            <button onclick="location.href='/Feira/@FeiraModel.nomeFeira/@produto.idProduto'">Produto</button>
+            <p>Preço: @produto.preco</p>
+            <button style="color: black; background-color: white; 
+                        border: 1px solid #E9AE0C;
+                        transition: background-color 0.2s ease-in-out;"
+                onmouseover="this.style.backgroundColor='#E9AE0C'" 
+                onmouseout="this.style.backgroundColor='white'" 
+                onclick="location.href='/Feira/@FeiraModel.nomeFeira/@produto.idProduto'">Produto</button>
         </li>
     }
 </ul>
 
+
+<br>
 <br>
 <br>
 <form method="post">
