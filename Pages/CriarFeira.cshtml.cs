@@ -21,11 +21,13 @@ namespace EZFair.Pages
         [BindProperty]
         public DateTime DataFinal { get; set; }
 
+        [BindProperty]
+        public string Descricao { get; set; }
+
         public int numParticipantes { get; set; }
 
-        public String Descricao { get; set; }
-
         public String Categoria { get; set; }
+
 
 
         public IActionResult OnGet()
@@ -42,7 +44,7 @@ namespace EZFair.Pages
             if (NomeEmUso(Nome) == 1) { TempData["ErrorMessage"] = "Nome já está em uso"; return null; } //ERRO NÂO TA A APARECER
             if (DataErrada(DataInicio, DataFinal) == 0) { TempData["ErrorMessage"] = "Datas estão erradas"; return null; }
            
-            Feira newFeira = new Feira(id, 1, 1, Nome, 0, DataInicio, DataFinal, " ");
+            Feira newFeira = new Feira(id, 1, 1, Nome, 0, DataInicio, DataFinal, Descricao);
 
             await CriarFeira(newFeira);
 
@@ -53,14 +55,13 @@ namespace EZFair.Pages
         {
             connection.Open();
 
-            using (SqlCommand command = new SqlCommand("INSERT INTO Feira (idFeira, empresa, categoria, nomeFeira, numParticipantes, dataInicio, dataFim, descricao) VALUES (@idFeira, @empresa, @categoria, @nomeFeira, @numParticipantes, @dataInicio, @dataFinal, @descricao)", connection))
+            using (SqlCommand command = new SqlCommand("INSERT INTO Feira (idFeira, empresa, categoria, nomeFeira, dataInicio, dataFim, descricao) VALUES (@idFeira, @empresa, @categoria, @nomeFeira, @dataInicio, @dataFinal, @descricao)", connection))
             {
                 // Add the parameters and their values
                 command.Parameters.AddWithValue("@idFeira", feira.idFeira);
                 command.Parameters.AddWithValue("@empresa", feira.empresa);
                 command.Parameters.AddWithValue("@categoria", feira.categoria);
                 command.Parameters.AddWithValue("@nomeFeira", feira.nomeFeira);
-                command.Parameters.AddWithValue("@numParticipantes", feira.numParticipantes);
                 command.Parameters.AddWithValue("@dataInicio", feira.dataInicio);
                 command.Parameters.AddWithValue("@dataFinal", feira.dataFinal);
                 command.Parameters.AddWithValue("@descricao", feira.descricao);
