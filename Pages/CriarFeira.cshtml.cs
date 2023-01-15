@@ -62,6 +62,8 @@ namespace EZFair.Pages
                 id = 3;
             else if (Categoria == "Jogos")
                 id = 4;
+            else if (Categoria == "Ferramentas")
+                id = 5;
 
             return id;
         }
