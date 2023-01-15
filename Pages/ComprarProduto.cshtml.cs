@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using NuGet.Protocol.Plugins;
 using System.Data;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -56,7 +57,11 @@ namespace EZFair.Pages
         [HttpPost]
         public void OnPostConfirmarCompra()
         {
-            deleteProduto();
+            prod.stock--;
+            if (prod.stock == 0)
+                deleteProduto();
+            else
+                changeStock(prod.stock, produto);
         }
 
         private void deleteProduto()
@@ -75,6 +80,24 @@ namespace EZFair.Pages
                 // Second query
                 command.CommandText = "DELETE FROM Produto WHERE idProduto = @prod;";
                 command.Parameters.AddWithValue("@prod", produto);
+                command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+        }
+
+        private void changeStock(int stock, int produto)
+        {
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = connection;
+
+                // First query
+                command.CommandText = "UPDATE Produto SET stock = @stock WHERE idProduto = @idProduto;";
+                command.Parameters.AddWithValue("@stock", stock);
+                command.Parameters.AddWithValue("@idProduto", produto);
                 command.ExecuteNonQuery();
             }
 
