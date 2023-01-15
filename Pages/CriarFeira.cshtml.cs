@@ -24,14 +24,14 @@ namespace EZFair.Pages
         [BindProperty]
         public string Descricao { get; set; }
 
-        public int numParticipantes { get; set; }
+        [BindProperty]
+        public string Categoria { get; set; }
 
-        public String Categoria { get; set; }
+        private static int idEmpresa; 
 
-
-        public IActionResult OnGet()
+        public void OnGet(int idEmpresa)
         {
-            return Page();
+            CriarFeiraModel.idEmpresa = idEmpresa;
         }
 
         [HttpPost]
@@ -39,15 +39,33 @@ namespace EZFair.Pages
         {
             int id = LastID();
             id++;
-            
+
+            int idcat = idCategoria(Categoria);
+
             if (NomeEmUso(Nome) == 1) { TempData["ErrorMessage"] = "Nome já está em uso"; return null; } //ERRO NÂO TA A APARECER
             if (DataErrada(DataInicio, DataFinal) == 0) { TempData["ErrorMessage"] = "Datas estão erradas"; return null; }
            
-            Feira newFeira = new Feira(id, 1, 1, Nome, 0, DataInicio, DataFinal, Descricao);
+            Feira newFeira = new Feira(id, idEmpresa, idcat, Nome, 0, DataInicio, DataFinal, Descricao);
 
             await CriarFeira(newFeira);
 
             return Redirect("/");
+        }
+
+        private int idCategoria(string Categoria)
+        {
+            int id = 1;
+
+            if (Categoria == "Roupa")
+                id = 2;
+            else if (Categoria == "Informática")
+                id = 3;
+            else if (Categoria == "Jogos")
+                id = 4;
+            else if (Categoria == "Ferramentas")
+                id = 5;
+
+            return id;
         }
 
         private async Task CriarFeira(Feira feira)

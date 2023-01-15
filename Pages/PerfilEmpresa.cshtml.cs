@@ -13,7 +13,8 @@ namespace EZFair.Pages
         SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         public string nome { get; set; }
         public string email { get; set; }
-        private int id { get; set; }
+        public static int id { get; set; }
+
         public static List<Feira> feiras = new List<Feira>();
         public void OnGet()
         {
@@ -64,7 +65,7 @@ namespace EZFair.Pages
         [HttpPost]
         public IActionResult OnPostCriarFeira()
         {
-            return RedirectToPage("CriarFeira");
+            return RedirectToPage("CriarFeira", new { idEmpresa = id });
         }
     }
 }
