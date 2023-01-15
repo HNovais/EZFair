@@ -14,13 +14,14 @@ namespace EZFair.Pages
         public string nome { get; set; }
         public string email { get; set; }
         public string username { get; set; }
+        public string numTelemovel { get; set; }
         public void OnGet()
         {
             var user = User.Identity;
 
             connection.Open();
 
-            using (SqlCommand command = new SqlCommand("SELECT nome, email, username, num FROM Cliente WHERE Username = @username", connection))
+            using (SqlCommand command = new SqlCommand("SELECT nome, email, username, numTelemovel FROM Cliente WHERE Username = @username", connection))
             {
                 command.Parameters.AddWithValue("@username", user.Name);
 
@@ -31,6 +32,7 @@ namespace EZFair.Pages
                         nome = reader.GetString(0);
                         email = reader.GetString(1);
                         username = reader.GetString(2);
+                        numTelemovel = reader.GetString(3);
                     }
                 }
             }

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@inject _LayoutModel LayoutModel
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,34 +18,46 @@
 <body>
     <header style="background-color: #292929; color: #EBEBEB; border-bottom: 2.5px solid white;">
         <div id="container">
-            <a href="@Url.Content("~/")">
-                <img src="~/Images/logonovo.png" alt="Homepage" title="Homepage" class="ezfair" border="0" style="height: 75px; float: left; margin-left: 30px; margin-right: 60px;">
+            <a href="@Url.Content("/")">
+               <img src="~/Images/logonovo.png" alt="Homepage" title="Homepage" class="ezfair" border="0" style="height: 75px; float: left; margin-left: 30px; margin-right: 60px;">
             </a>
+
             @*<div id="searchbar">
                 <input type="text" class="searchterm" placeholder="Pesquisar feira">
                 <img src="~/Images/search.png" alt="Search" class="searchicon">
             </div>*@
-
             <div id="account">
-                <a href="#")">
+            @if (User.IsInRole("Cliente"))
+            {
+                <a href="@Url.Content("/PerfilCliente")">
                     <img src="~/Images/accountnova.png" class="account" style="width: 50px; height: 50px; margin-left: 40px; margin-right: 40px; background: none; ">
                 </a>
+            }
+            else if (User.IsInRole("Empresa"))
+            {
+                <a href="@Url.Content("/PerfilEmpresa")">
+                    <img src="~/Images/accountnova.png" class="account" style="width: 50px; height: 50px; margin-left: 40px; margin-right: 40px; background: none; ">
+                </a>
+            }
+            else
+            {
+                <img src="~/Images/accountnova.png" class="account" style="width: 50px; height: 50px; margin-left: 40px; margin-right: 40px; background: none; ">
+            }
+
             </div>
 
             @if(User.Identity.IsAuthenticated) {
-    <div id="hide">
-        <a href="#">Logout</a><br>
-    </div>
-} else {
-    <div id="hide">
-        <a href="@Url.Content("~/ChooseRegister")">Registar</a><br>
-        <a href="@Url.Content("~/ChooseLogin")">Login</a><br>
-    </div>
-}
-
-            
-        </div>
-    </header>
+                <div id="hide">
+                    @*<a href="#" onclick="@LayoutModel.Logout()">Logout</a>*@
+                </div>
+            } else {
+                <div id="hide">
+                    <a href="@Url.Content("~/ChooseRegister")">Registar</a><br>
+                    <a href="@Url.Content("~/ChooseLogin")">Login</a><br>
+                </div>
+            }
+         </div>
+</header>
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -69,4 +86,5 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
