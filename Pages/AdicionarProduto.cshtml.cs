@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Runtime.InteropServices;
 
@@ -35,20 +36,29 @@ namespace EZFair.Pages
             return Page();
         }
 
-        [HttpPost]
-        public IActionResult OnPostAsync()
+        public IActionResult OnPostPls()
         {
-            Console.WriteLine("aqui");
-            Produto produto = new Produto(Stock, Price, Name);
-            Console.WriteLine("aqui");
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    ImageFile.CopyTo(stream);
+                    var image = stream.ToArray();
 
-            int idProduto = AdicionarProduto(produto, idFeira);
-            Console.WriteLine("aqui");
+                    Produto produto = new Produto(Stock, Price, Name);
+                    int idProduto = AdicionarProduto(produto, idFeira, image);
 
-            return RedirectToPage("Anuncio", new { nomeFeira, idProduto });
+                    return RedirectToPage("Anuncio", new { nomeFeira, idProduto });
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("ImageFile", "Please select an image to upload.");
+                return Page();
+            }
         }
 
-        private int AdicionarProduto(Produto produto, int idFeira)
+        private int AdicionarProduto(Produto produto, int idFeira, byte[] image)
         {
             int idProduto;
             connection.Open();
@@ -77,7 +87,7 @@ namespace EZFair.Pages
                 command.CommandText = "INSERT INTO Anuncio (produto, feira, imagem) VALUES (@produto, @feira, @imagem)";
                 command.Parameters.AddWithValue("@produto", anuncio.produto);
                 command.Parameters.AddWithValue("@feira", anuncio.feira);
-                command.Parameters.AddWithValue("@imagem", ImageFile);
+                command.Parameters.AddWithValue("@imagem", image);
                 command.ExecuteNonQuery();
             }
 

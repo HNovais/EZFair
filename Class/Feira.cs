@@ -1,4 +1,6 @@
-﻿namespace EZFair.Class
+﻿using Microsoft.AspNetCore.Server.IIS.Core;
+
+namespace EZFair.Class
 {
     public class Feira
     {
@@ -10,6 +12,7 @@
         public DateTime dataInicio { get; set; }
         public DateTime dataFinal { get; set; }
         public string descricao { get; set; }
+        public string estado { get; set; }
 
         public Feira(int idFeira, int empresa, int categoria, string nomeFeira, int numParticipantes, DateTime dataInicio, DateTime dataFinal, string descricao)
         {
@@ -22,32 +25,23 @@
             this.dataFinal = dataFinal;
             this.descricao = descricao;
         }
-        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final, int numParticipantes)
+
+        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final, int categoria, string estado)
         {
             this.nomeFeira = nomeFeira;
             this.empresa = empresa;
             this.dataInicio = inicio;
             this.dataFinal = final;
-            this.numParticipantes = numParticipantes;
+            this.categoria = categoria;
+            this.estado = estado;
         }
 
-        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final)
+        public Feira(int idEmpresa, string nomeFeira, DateTime inicio, DateTime fim)
         {
             this.nomeFeira = nomeFeira;
             this.empresa = empresa;
             this.dataInicio = inicio;
-            this.dataFinal = final;
-        }
-
-        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final, int numParticipantes, string descricao)
-        {
-            this.nomeFeira = nomeFeira;
-            this.empresa = empresa;
-            this.dataInicio = inicio;
-            this.dataFinal = final;
-            this.numParticipantes = numParticipantes;
-            this.descricao = descricao;
+            this.dataFinal = fim;
         }
     }
-
 }

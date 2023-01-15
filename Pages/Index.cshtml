@@ -18,10 +18,12 @@
         <br>
         <h2>Categoria:</h2>
     </div>
+
+<h1>Feiras a Decorrer</h1>
+
 <ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; ">
     @foreach (var feira in IndexModel.feiras)
 {
-
     <li style="margin-right:100px; display: flex; flex-direction: column;">
         <h2>@feira.nomeFeira</h2>
         <br>
@@ -31,16 +33,80 @@
         <br>
         <h2> @Model.getCategoriaNome(feira)</h2>
         <br>
-        <button style="color: black; background-color: white; 
-                    border: 1px solid #E9AE0C;
-                    transition: background-color 0.2s ease-in-out;"
-            onmouseover="this.style.backgroundColor='#E9AE0C'" 
-            onmouseout="this.style.backgroundColor='white'" 
-            onclick="location.href='/Feira/@feira.nomeFeira'"> Ver Feira</button>
+        <form method="post">
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Escolher" asp-route-estado="@feira.estado" asp-route-idFeira="@feira.idFeira" asp-route-nomeFeira="@feira.nomeFeira"
+                            style="color: black; background-color: white; 
+                            border: 1px solid #E9AE0C;
+                            transition: background-color 0.2s ease-in-out;"
+                            onmouseover="this.style.backgroundColor='#E9AE0C'" 
+                            onmouseout="this.style.backgroundColor='white'">
+                    Ver Feira
+                    </button>
+                </form>
+        <br>
+        <h2>Acaba em @Model.getDuracao(feira) dias</h2>
     </li>
 }
 </ul>
 </div>
+
+<h1>Feiras em Breve</h1>
+<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; ">
+    @foreach (var feira in IndexModel.feirasBrevemente)
+{
+    <li style="margin-right:100px; display: flex; flex-direction: column;">
+        <h2>@feira.nomeFeira</h2>
+        <br>
+        <h2>@feira.numParticipantes</h2>
+        <br>
+        <h2> @Model.getEmpresaNome(feira)</h2>
+        <br>
+        <h2> @Model.getCategoriaNome(feira)</h2>
+        <br>
+         <form method="post">
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Escolher" asp-route-estado="@feira.estado" asp-route-idFeira="@feira.idFeira" asp-route-nomeFeira="@feira.nomeFeira"
+                            style="color: black; background-color: white; 
+                            border: 1px solid #E9AE0C;
+                            transition: background-color 0.2s ease-in-out;"
+                            onmouseover="this.style.backgroundColor='#E9AE0C'" 
+                            onmouseout="this.style.backgroundColor='white'">
+                    Ver Feira
+                    </button>
+                </form>
+        <br>
+        <h2>Começa a @feira.dataInicio</h2>
+    </li>
+}
+</ul>
+
+<h1>Feiras Terminadas</h1>
+<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; ">
+    @foreach (var feira in IndexModel.feirasTerminadas)
+{
+    <li style="margin-right:100px; display: flex; flex-direction: column;">
+        <h2>@feira.nomeFeira</h2>
+        <br>
+        <h2>@feira.numParticipantes</h2>
+        <br>
+        <h2> @Model.getEmpresaNome(feira)</h2>
+        <br>
+        <h2> @Model.getCategoriaNome(feira)</h2>
+        <br>
+         <form method="post">
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Escolher" asp-route-estado="@feira.estado" asp-route-idFeira="@feira.idFeira" asp-route-nomeFeira="@feira.nomeFeira"
+                            style="color: black; background-color: white; 
+                            border: 1px solid #E9AE0C;
+                            transition: background-color 0.2s ease-in-out;"
+                            onmouseover="this.style.backgroundColor='#E9AE0C'" 
+                            onmouseout="this.style.backgroundColor='white'">
+                    Ver Feira
+                    </button>
+                </form>
+        <br>
+        <h2>Terminou a @feira.dataFinal</h2>
+    </li>
+}
+</ul>
 
 <style>
     body {
