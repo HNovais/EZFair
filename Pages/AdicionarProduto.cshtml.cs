@@ -22,6 +22,9 @@ namespace EZFair.Pages
         [BindProperty]
         public string Name { get; set; }
 
+        [BindProperty]
+        public IFormFile ImageFile { get; set; }
+
         public static string nomeFeira;
         private static int idFeira;
 
@@ -32,11 +35,15 @@ namespace EZFair.Pages
             return Page();
         }
 
+        [HttpPost]
         public IActionResult OnPostAsync()
         {
+            Console.WriteLine("aqui");
             Produto produto = new Produto(Stock, Price, Name);
+            Console.WriteLine("aqui");
 
             int idProduto = AdicionarProduto(produto, idFeira);
+            Console.WriteLine("aqui");
 
             return RedirectToPage("Anuncio", new { nomeFeira, idProduto });
         }
@@ -67,9 +74,10 @@ namespace EZFair.Pages
                 Console.WriteLine(anuncio.feira);
 
                 //Third query
-                command.CommandText = "INSERT INTO Anuncio (produto, feira) VALUES (@produto, @feira)";
+                command.CommandText = "INSERT INTO Anuncio (produto, feira, imagem) VALUES (@produto, @feira, @imagem)";
                 command.Parameters.AddWithValue("@produto", anuncio.produto);
                 command.Parameters.AddWithValue("@feira", anuncio.feira);
+                command.Parameters.AddWithValue("@imagem", ImageFile);
                 command.ExecuteNonQuery();
             }
 

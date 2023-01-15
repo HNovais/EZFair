@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Features;
+using System.Drawing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/LoginCliente";
         options.AccessDeniedPath = "/ChooseLogin";
     });
+
+builder.Services.Configure<FormOptions>(options => {
+    options.MultipartBodyLengthLimit = 5242880;
+});
 
 var app = builder.Build();
 
