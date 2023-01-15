@@ -1,28 +1,45 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
 }
 
 <br>
 <h1 style="text-align: center; color: #DEA402; font-size: 4em; text-shadow: 1px 1px 0px white;">EZFair</h1>
 <br>
 <br>
-<ul style="color: white; display: flex; flex-wrap: nowrap; list-style-type: none;">
+<div style="color: white; display: flex; flex-wrap: nowrap;">
+    <div style="display: flex; flex-direction: column;">
+        <h2>Nome:</h2>
+        <br>
+        <h2>Num. Participantes:</h2>
+        <br>
+        <h2>Empresa:</h2>
+    </div>
+<ul style="display: flex; flex-wrap: nowrap; list-style-type: none;">
     @foreach (var feira in IndexModel.feiras)
-    {
-        <li style="margin-right:70px">
-            <h2>@feira.nomeFeira</h2>
-            <br>
-            <button style="color: black; background-color: white; 
-                        border: 1px solid #E9AE0C;
-                        transition: background-color 0.2s ease-in-out;"
-                onmouseover="this.style.backgroundColor='#E9AE0C'" 
-                onmouseout="this.style.backgroundColor='white'" 
-                onclick="location.href='/Feira/@feira.nomeFeira'"> Ver Feira</button>
-        </li>
-    }
+{
+
+@Html.DisplayFor(modelItem => feira.getCategoriaNome)
+
+    @*@var categoria = Model.getCategoriaNome(feira);*@
+    <li style="margin-right:70px; display: flex; flex-direction: column;">
+        <h2>@feira.nomeFeira</h2>
+        <br>
+        <h2>@feira.numParticipantes</h2>
+        <br>
+        <h2>Categoria: @categoria</h2>
+        <br>
+        <button style="color: black; background-color: white; 
+                    border: 1px solid #E9AE0C;
+                    transition: background-color 0.2s ease-in-out;"
+            onmouseover="this.style.backgroundColor='#E9AE0C'" 
+            onmouseout="this.style.backgroundColor='white'" 
+            onclick="location.href='/Feira/@feira.nomeFeira'"> Ver Feira</button>
+    </li>
+}
 </ul>
+</div>
 
 <style>
     body {

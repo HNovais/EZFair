@@ -21,6 +21,13 @@ namespace EZFair.Pages
         [BindProperty]
         public DateTime DataFinal { get; set; }
 
+        public int numParticipantes { get; set; }
+
+        public String Descricao { get; set; }
+
+        public String Categoria { get; set; }
+
+
         public IActionResult OnGet()
         {
             return Page();

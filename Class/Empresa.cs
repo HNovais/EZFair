@@ -16,6 +16,5 @@
             this.password = password;
             this.nipc = nipc;   
         }
-
     }
 }

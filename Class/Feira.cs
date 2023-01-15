@@ -22,12 +22,31 @@
             this.dataFinal = dataFinal;
             this.descricao = descricao;
         }
+        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final, int numParticipantes)
+        {
+            this.nomeFeira = nomeFeira;
+            this.empresa = empresa;
+            this.dataInicio = inicio;
+            this.dataFinal = final;
+            this.numParticipantes = numParticipantes;
+        }
+
         public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final)
         {
             this.nomeFeira = nomeFeira;
             this.empresa = empresa;
             this.dataInicio = inicio;
             this.dataFinal = final;
+        }
+
+        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final, int numParticipantes, string descricao)
+        {
+            this.nomeFeira = nomeFeira;
+            this.empresa = empresa;
+            this.dataInicio = inicio;
+            this.dataFinal = final;
+            this.numParticipantes = numParticipantes;
+            this.descricao = descricao;
         }
     }
 }

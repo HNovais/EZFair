@@ -14,7 +14,8 @@ namespace EZFair.Pages
 
         SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         public string descricao { get; set; }
-        public static int produto { get; set; } 
+        public static int produto { get; set; }
+        public static int stock { get; set; }
         public static string nome { get; set; }
         public static float preco { get; set; }
 
@@ -46,7 +47,7 @@ namespace EZFair.Pages
                 descricao = command.ExecuteScalar() as string;
 
                 //Third query
-                command.CommandText = "SELECT preco, nomeProduto FROM Produto WHERE idProduto = @produto";
+                command.CommandText = "SELECT preco, nomeProduto, stock FROM Produto WHERE idProduto = @produto";
                 command.Parameters.AddWithValue("@produto", produto);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -55,6 +56,7 @@ namespace EZFair.Pages
                         double temp = reader.GetDouble(0);
                         preco = Convert.ToSingle(temp);
                         nome = reader.GetString(1);
+                        stock = reader.GetInt32(2);
                     }
                 }
             }

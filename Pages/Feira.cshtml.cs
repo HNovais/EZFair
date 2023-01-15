@@ -1,6 +1,7 @@
 using EZFair.Class;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Data.SqlClient;
 using System.Composition.Convention;
 using System.Data;
@@ -17,6 +18,12 @@ namespace EZFair.Pages
         private int idEmpresa { get; set; }
         public DateTime inicio { get; set; }
         public DateTime final { get; set; }
+        public int numParticipantes { get; set; }
+        public string descricao { get; set; }
+        public string email { get; set; }
+
+        public int idCategoria { get; set; }
+        public string categoria { get; set; }
 
         public Feira feira;
         
@@ -38,7 +45,7 @@ namespace EZFair.Pages
                 command.Connection = connection;
 
                 // First query
-                command.CommandText = "SELECT empresa, dataInicio, dataFim FROM Feira WHERE nomeFeira = @nomeFeira";
+                command.CommandText = "SELECT empresa, dataInicio, dataFim, numParticipantes, descricao, categoria FROM Feira WHERE nomeFeira = @nomeFeira";
                 command.Parameters.AddWithValue("@nomeFeira", nomeFeira);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -48,12 +55,15 @@ namespace EZFair.Pages
                         FeiraModel.nomeFeira = nomeFeira;
                         this.inicio = reader.GetDateTime(1);
                         this.final = reader.GetDateTime(2);
+                        this.numParticipantes = reader.GetInt32(3);
+                        this.descricao = reader.GetString(4);
+                        this.idCategoria = reader.GetInt32(5);
                     }
 
-                    feira = new Feira(idEmpresa, nomeFeira, inicio, final);
+                    feira = new Feira(idEmpresa, nomeFeira, inicio, final, numParticipantes, descricao);
                     reader.Close();
 
-                    using (SqlCommand command2 = new SqlCommand("SELECT nomeEmpresa FROM Empresa WHERE idEmpresa = @idEmpresa", connection))
+                    using (SqlCommand command2 = new SqlCommand("SELECT nomeEmpresa, email FROM Empresa WHERE idEmpresa = @idEmpresa", connection))
                     {
                         command2.Parameters.AddWithValue("@idEmpresa", idEmpresa);
                         using (SqlDataReader reader2 = command2.ExecuteReader())
@@ -61,8 +71,23 @@ namespace EZFair.Pages
                             if (reader2.Read())
                             {
                                 this.empresa = reader2.GetString(0);
+                                this.email = reader2.GetString(1);
                             }
                         }
+                        reader.Close();
+                    }
+
+                    using (SqlCommand command2 = new SqlCommand("SELECT nomeCategoria FROM Categoria WHERE idCategoria = @idCategoria", connection))
+                    {
+                        command2.Parameters.AddWithValue("@idCategoria", idCategoria);
+                        using (SqlDataReader reader2 = command2.ExecuteReader())
+                        {
+                            if (reader2.Read())
+                            {
+                                this.categoria = reader2.GetString(0);
+                            }
+                        }
+                        reader.Close();
                     }
                 }
 

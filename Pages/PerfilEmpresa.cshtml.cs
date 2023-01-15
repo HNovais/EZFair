@@ -39,7 +39,7 @@ namespace EZFair.Pages
                 }
 
                 // Second query
-                command.CommandText = "SELECT empresa, nomeFeira, dataInicio, dataFim FROM Feira WHERE empresa = @idEmpresa";
+                command.CommandText = "SELECT empresa, nomeFeira, dataInicio, dataFim, numParticipantes FROM Feira WHERE empresa = @idEmpresa";
                 command.Parameters.AddWithValue("@idEmpresa", id);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -49,8 +49,9 @@ namespace EZFair.Pages
                         string nomeFeira = reader.GetString(1);
                         DateTime inicio = reader.GetDateTime(2);
                         DateTime fim = reader.GetDateTime(3);
+                        int numParticipantes = reader.GetInt32(4);
 
-                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim);
+                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim, numParticipantes);
                         feiras.Add(newFeira);
                     }
                 }

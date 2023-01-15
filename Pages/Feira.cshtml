@@ -7,11 +7,48 @@
 <h1 style="text-align: center; color: #DEA402; font-size: 4em; text-shadow: 1px 1px 0px white;">@FeiraModel.nomeFeira</h1>
 <br>
 <br>
-<div style="display: flex;">
-    <p style="color: white; margin-right: 350px; font-size: 1.5em;">Criador: @Model.empresa</p>
-    <p style="color: white; margin-right: 250px; font-size: 1.5em;">Data de Início: @Model.inicio.ToString("dd/MM/yyyy")</p>
-    <p style="color: white; font-size: 1.5em;">Data de Fim: @Model.final.ToString("dd/MM/yyyy")</p>
+<center>
+<div class="st" style="display: flex;">
+    <div class="st2">
+    <h3 style="color: white;">Criador: </h3>
+    <p style="color: #e7e7e7; font-size: 1.5em;">@Model.empresa</p>
+    </div>
+    <div class="st2">
+    <h3 style="color: white;">Email: </h3>
+    <p style="color: #e7e7e7; font-size: 1.5em;">@Model.email</p>
+    </div>
+    <div class="st2">
+    <h3 style="color: white;">Categoria: </h3>
+    <p style="color: #e7e7e7; font-size: 1.5em;">@Model.categoria</p>
+    </div>
+    <div class="st2">
+    <h3 style="color: white;">Data de Início: </h3>
+    <p style="color: #e7e7e7; font-size: 1.5em;">@Model.inicio.ToString("dd/MM/yyyy")</p>
+    </div>
+    <div class="st2">
+    <h3 style="color: white;">Data de Fim: </h3>
+    <p style="color: #e7e7e7; font-size: 1.5em;">@Model.final.ToString("dd/MM/yyyy")</p>
+    </div>
+    <div class="st2">
+    <h3 style="color: white;">Num. de Participantes: </h3>
+    <p style="color: #e7e7e7; font-size: 1.5em;">@Model.numParticipantes</p>
 </div>
+<br>
+<br>
+<br>
+<br>
+    </div>
+    <center>
+    <div style="float: left;">
+        <h3 style="color: white;">Descrição: </h3>
+    </div>
+    <div style="float: left; padding-left: 10px;">
+        <p style="color: white; font-size: 1.2em;">@Model.descricao</p>
+    </div>
+    <div style="clear: both;"></div>
+    <br>
+    </center>
+    </center>
 <br>
 
 <ul style="color: white; display: flex; flex-wrap: nowrap; list-style-type: none;">
@@ -19,7 +56,7 @@
     {
         <li style="margin-right:50px">
             <h2>@produto.nomeProduto</h2>
-            <p>Preço: @produto.preco</p>
+            <p>Preço: @produto.preco€</p>
             <button style="color: black; background-color: white; 
                         border: 1px solid #E9AE0C;
                         transition: background-color 0.2s ease-in-out;"
@@ -53,5 +90,18 @@
 <style>
     body {
         background-color: #121212;
+    }
+
+    .st p { font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+
+    .st {
+        width: 100%;
+    }
+
+    .st2 {
+        display: inline-block;
+        box-sizing: border-box;
+        // margin-right: 4px;
+        padding: 4%;
     }
 </style>

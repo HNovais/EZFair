@@ -16,4 +16,4 @@ public class _LayoutModel : PageModel
     {
         await _httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
-}
+} 
