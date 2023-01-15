@@ -4,11 +4,38 @@
     ViewData["Title"] = "Empresa";
 }
 
-<h1>@ViewData["Title"]</h1>
 
-<p>Name: @Model.nome</p>
-<p>Email: @Model.email</p>
+<div class="user-profile">
+    <img src="~/images/empresa.png" alt="profile picture">
+    <div class="profile-info">
+        <h2>@Model.nome</h2>
+        <p><i class="fa fa-envelope"></i> @Model.email</p>
+        @*<p><i class="fa fa-user"></i> @Model.email</p>*@
+    </div>
+</div>
 
-<form method="post">
-    <button type="submit" class="btn btn-primary" asp-page-handler="CriarFeira">Criar Feira</button>
-</form>
+<style>
+    body {
+        background-color: #121212;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        background-color: #EBEBEB;
+        padding: 20px;
+        margin-top: 50px;
+        border: 2.5px solid white;
+    }
+
+    .user-profile img {
+        width: 120px;
+        height: 100px;
+        /*border-radius: 50%;*/
+        margin-right: 20px;
+    }
+
+    .profile-info p {
+        margin: 10px 0;
+    }
+</style>

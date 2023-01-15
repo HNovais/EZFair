@@ -3,14 +3,12 @@
 @{
 }
 
-<h1>@FeiraModel.nomeFeira</h1>
-<p>Empresa: @Model.empresa</p>
-<p>Data de Início: @Model.inicio.ToString("dd/MM/yyyy")</p>
-<p>Data de Fim: @Model.final.ToString("dd/MM/yyyy")</p>
-
-<form method="post">
-    <button type="submit" class="btn btn-primary" asp-page-handler="AdicionarProduto">Adicionar produto</button>
-</form>
+<br>
+<h1 style="text-align: center; color: #DEA402; font-size: 4em; text-shadow: 1px 1px 0px white;">@FeiraModel.nomeFeira</h1>
+<br>
+<p style="color: white">  Empresa: @Model.empresa</p>
+<p style="color: white">  Data de Início: @Model.inicio.ToString("dd/MM/yyyy")</p>
+<p style="color: white">  Data de Fim: @Model.final.ToString("dd/MM/yyyy")</p>
 
 <ul>
     @foreach (var produto in FeiraModel.produtos)
@@ -22,3 +20,27 @@
         </li>
     }
 </ul>
+
+<br>
+<br>
+<form method="post">
+    <div style="text-align:center;">
+        <button type="submit" class="btn btn-primary" asp-page-handler="AdicionarProduto"
+                style="background-color: #DEA402;
+                       color: white;
+                       padding: 15px 15px;
+                       text-decoration: none;
+                       display: inline-block;
+                       font-size: 35px;
+                       margin: 4px 2px;
+                       border: 1px solid white;
+                       cursor: pointer;">Adicionar Produto</button>
+    </div>
+</form>
+<br>
+
+<style>
+    body {
+        background-color: #121212;
+    }
+</style>

@@ -9,7 +9,8 @@ a.navbar-brand {
   }
   
   a {
-    color: #0077cc;
+    color: #cc9600;
+    text-decoration: underlined;
   }
   
   .btn-primary {
@@ -47,7 +48,7 @@ a.navbar-brand {
     white-space: nowrap;
     line-height: 60px;
   }
-  #hide { font-size: 25px; text-decoration:none; opacity: 0.0; -webkit-transition: all 500ms ease-in-out; -moz-transition: all 500ms ease-in-out; -ms-transition: all 500ms ease-in-out; -o-transition: all 500ms ease-in-out; transition: all 500ms ease-in-out; background-color: black; border: 2px solid #0c0c0c; padding: 5px; visibility: hidden; isplay: flex; justify-content: flex-end; }
+  #hide { font-size: 25px;  opacity: 0.0; -webkit-transition: all 500ms ease-in-out; -moz-transition: all 500ms ease-in-out; -ms-transition: all 500ms ease-in-out; -o-transition: all 500ms ease-in-out; transition: all 500ms ease-in-out; background-color: black; border: 2px solid #0c0c0c; padding: 5px; visibility: hidden; isplay: flex; justify-content: flex-end; }
   #account:hover + #hide, #hide:hover { opacity: 1.0; visibility: visible; }
   #account {
     position: absolute;
@@ -59,4 +60,7 @@ a.navbar-brand {
     right: 0; /* ou right: 0; */
     top: 85px; /* ou top: 50px; */
   }
+
+  #hide a { text-decoration: none; }
+  #hide a:hover { color: white; }
  
