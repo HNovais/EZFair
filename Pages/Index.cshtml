@@ -4,18 +4,3 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <a asp-page="/PerfilCliente">Perfil Cliente</a>
-</div>
-
-<ul>
-    @foreach (var feira in IndexModel.feiras)
-    {
-        <li>
-            <h2>@feira.nomeFeira</h2>
-            <button onclick="location.href='/Feira/@feira.nomeFeira'">Feira</button>
-        </li>
-    }
-</ul>
