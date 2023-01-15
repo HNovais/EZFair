@@ -30,9 +30,6 @@ namespace EZFair.Pages
         private static int idEmpresa; 
 
         public void OnGet(int idEmpresa)
-        public IActionResult OnGet()
-        public IActionResult OnGet()
-        public IActionResult OnGet()
         {
             CriarFeiraModel.idEmpresa = idEmpresa;
         }
