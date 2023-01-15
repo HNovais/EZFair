@@ -1,14 +1,13 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using EZFair.Class;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EZFair.Pages
 {
+    [Authorize(Roles = "Empresa")]
     public class CriarFeiraModel : PageModel
     {
         SqlConnection connection = new SqlConnection("Server=tcp:ezfair.database.windows.net,1433;Initial Catalog=EZFair;Persist Security Info=False;User ID=ezfair;Password=LI4-muitofixe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");

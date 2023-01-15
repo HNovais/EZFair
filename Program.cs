@@ -9,7 +9,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/LoginCliente";
-        options.AccessDeniedPath = "/Index";
+        options.AccessDeniedPath = "/ChooseLogin";
     });
 
 var app = builder.Build();
@@ -27,6 +27,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
