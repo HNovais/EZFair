@@ -18,7 +18,7 @@
     <p style="color: #e7e7e7; font-size: 1.5em;">@Model.email</p>
     </div>
     <div class="st2">
-    <h3 style="color: white;">Categoria: </h3>
+    <h3 style="color: white;">Categoria: </h3
     <p style="color: #e7e7e7; font-size: 1.5em;">@Model.categoria</p>
     </div>
     <div class="st2">
@@ -71,6 +71,9 @@
 <br>
 <br>
 <br>
+
+@if(Model.feira.estado == "Decorrer")
+{
 <form method="post">
     <div style="text-align:center;">
         <button type="submit" class="btn btn-primary" asp-page-handler="AdicionarProduto"
@@ -85,6 +88,8 @@
                        cursor: pointer;">Adicionar Produto</button>
     </div>
 </form>
+}
+
 <br>
 
 <style>

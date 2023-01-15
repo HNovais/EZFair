@@ -23,8 +23,8 @@ namespace EZFair.Pages
         [BindProperty]
         public string Name { get; set; }
 
-        [BindProperty]
-        public IFormFile ImageFile { get; set; }
+        /*[BindProperty]
+        public IFormFile ImageFile { get; set; }*/
 
         public static string nomeFeira;
         private static int idFeira;
@@ -38,27 +38,27 @@ namespace EZFair.Pages
 
         public IActionResult OnPostPls()
         {
-            if (ImageFile != null && ImageFile.Length > 0)
-            {
-                using (var stream = new MemoryStream())
-                {
-                    ImageFile.CopyTo(stream);
-                    var image = stream.ToArray();
+            //if (ImageFile != null && ImageFile.Length > 0)
+            //{
+               //using (var stream = new MemoryStream())
+               
+                    //ImageFile.CopyTo(stream);
+                    //var image = stream.ToArray();
 
                     Produto produto = new Produto(Stock, Price, Name);
-                    int idProduto = AdicionarProduto(produto, idFeira, image);
+                    int idProduto = AdicionarProduto(produto, idFeira);
 
                     return RedirectToPage("Anuncio", new { nomeFeira, idProduto });
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("ImageFile", "Please select an image to upload.");
-                return Page();
-            }
+                //}
+            //}
+            //else
+            //{
+                //ModelState.AddModelError("ImageFile", "Please select an image to upload.");
+                //return Page();
+            //}
         }
 
-        private int AdicionarProduto(Produto produto, int idFeira, byte[] image)
+        private int AdicionarProduto(Produto produto, int idFeira)
         {
             int idProduto;
             connection.Open();
@@ -84,10 +84,10 @@ namespace EZFair.Pages
                 Console.WriteLine(anuncio.feira);
 
                 //Third query
-                command.CommandText = "INSERT INTO Anuncio (produto, feira, imagem) VALUES (@produto, @feira, @imagem)";
+                command.CommandText = "INSERT INTO Anuncio (produto, feira-) VALUES (@produto, @feira)";
                 command.Parameters.AddWithValue("@produto", anuncio.produto);
                 command.Parameters.AddWithValue("@feira", anuncio.feira);
-                command.Parameters.AddWithValue("@imagem", image);
+               // command.Parameters.AddWithValue("@imagem", image);
                 command.ExecuteNonQuery();
             }
 

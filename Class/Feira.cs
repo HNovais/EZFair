@@ -26,7 +26,7 @@ namespace EZFair.Class
             this.descricao = descricao;
         }
 
-        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final, int categoria, string estado)
+        public Feira(int empresa, string nomeFeira, DateTime inicio, DateTime final, int categoria, string estado, int idFeira)
         {
             this.nomeFeira = nomeFeira;
             this.empresa = empresa;
@@ -34,14 +34,26 @@ namespace EZFair.Class
             this.dataFinal = final;
             this.categoria = categoria;
             this.estado = estado;
+            this.idFeira = idFeira;
         }
 
         public Feira(int idEmpresa, string nomeFeira, DateTime inicio, DateTime fim)
         {
+            this.empresa = idEmpresa;
             this.nomeFeira = nomeFeira;
             this.empresa = empresa;
             this.dataInicio = inicio;
             this.dataFinal = fim;
+        }
+
+        public Feira(int idEmpresa, string nomeFeira, DateTime inicio, DateTime final, string estado, string descricao)
+        {
+            this.empresa = idEmpresa;
+            this.nomeFeira = nomeFeira;
+            this.dataInicio = inicio;
+            this.dataFinal = final;
+            this.estado = estado;
+            this.descricao = descricao;
         }
     }
 }

@@ -104,7 +104,7 @@ namespace EZFair.Pages
                         int idFeira = reader.GetInt32(5);
 
                         string estado = setEstado(inicio, fim);
-                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim, idCategoria, estado);
+                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim, idCategoria, estado, idFeira);
 
                         if (estado == "Terminada")
                             feirasTerminadas.Add(newFeira);
@@ -139,6 +139,7 @@ namespace EZFair.Pages
         public IActionResult OnPostEscolher(string estado, int idFeira, string nomeFeira)
         {
             updateEstado(estado, idFeira);
+            Console.WriteLine(estado, idFeira);
             return RedirectToPage("Feira", new { nomeFeira = nomeFeira });
         }
     
@@ -156,6 +157,7 @@ namespace EZFair.Pages
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
             }
+
             connection.Close();
         }
 
