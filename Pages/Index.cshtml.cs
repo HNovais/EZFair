@@ -32,6 +32,43 @@ namespace EZFair.Pages
             getFeiras();
         }
 
+        public String getEmpresaNome(Feira feira)
+        {
+            string empresa;
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = connection;
+
+                command.CommandText = "SELECT nomeEmpresa FROM Empresa WHERE idEmpresa = @res";
+                command.Parameters.AddWithValue("@res", feira.empresa);
+                empresa = command.ExecuteScalar() as string;
+            }
+
+            connection.Close();
+            return empresa;
+        }
+
+        public String getCategoriaNome(Feira feira)
+        {
+            string categoria;
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = connection;
+
+                command.CommandText = "SELECT nomeCategoria FROM Categoria WHERE idCategoria = @res";
+                command.Parameters.AddWithValue("@res", feira.categoria);
+                categoria = command.ExecuteScalar() as string;
+            }
+
+            connection.Close();
+
+            return categoria;
+        }
+
         private void getFeiras()
         {
             connection.Open();
@@ -40,7 +77,7 @@ namespace EZFair.Pages
             {
                 command.Connection = connection;
 
-                command.CommandText = "SELECT empresa, nomeFeira, dataInicio, dataFim FROM Feira";
+                command.CommandText = "SELECT empresa, nomeFeira, dataInicio, dataFim, categoria, empresa FROM Feira";
                 command.ExecuteNonQuery();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -50,91 +87,16 @@ namespace EZFair.Pages
                         string nomeFeira = reader.GetString(1);
                         DateTime inicio = reader.GetDateTime(2);
                         DateTime fim = reader.GetDateTime(3);
+                        int idCategoria = reader.GetInt32(4);
 
-                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim);
+                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim, idCategoria);
                         feiras.Add(newFeira);
+                        
                     }
                 }
             }
+            connection.Close();
         }
 
-        public void getEmpresaNome(Feira feira)
-        {
-            int res;
-            string result = "";
-            connection.Open();
-
-            using (SqlCommand command = new SqlCommand())
-            {
-                command.Connection = connection;
-
-                // First query
-                command.CommandText = "SELECT empresa FROM Feira WHERE nomeFeira = @feira.nomeFeira";
-                command.Parameters.AddWithValue("@nomeFeira", feira.nomeFeira);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        res = reader.GetInt32(0);
-                    }
-
-                    reader.Close();
-
-                    using (SqlCommand command2 = new SqlCommand("SELECT nomeEmpresa FROM Empresa WHERE idEmpresa = @res", connection))
-                    {
-                        command2.Parameters.AddWithValue("@res", idEmpresa);
-                        using (SqlDataReader reader2 = command2.ExecuteReader())
-                        {
-                            if (reader2.Read())
-                            {
-                                result = reader2.GetString(0);
-                            }
-                        }
-                        reader.Close();
-                    }
-                }
-            }
-            this.empresa = result;
-        }
-
-
-        public void getCategoriaNome(Feira feira)
-        {
-            int res;
-            string result = "";
-            connection.Open();
-
-            using (SqlCommand command = new SqlCommand())
-            {
-                command.Connection = connection;
-
-                // First query
-                command.CommandText = "SELECT categoria FROM Feira WHERE nomeFeira = @feira.nomeFeira";
-                command.Parameters.AddWithValue("@nomeFeira", feira.nomeFeira);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        res = reader.GetInt32(0);
-                    }
-
-                    reader.Close();
-
-                    using (SqlCommand command2 = new SqlCommand("SELECT nomeCategoria FROM Categoria WHERE idCategoria = @res", connection))
-                    {
-                        command2.Parameters.AddWithValue("@res", idCategoria);
-                        using (SqlDataReader reader2 = command2.ExecuteReader())
-                        {
-                            if (reader2.Read())
-                            {
-                                result = reader2.GetString(0);
-                            }
-                        }
-                        reader.Close();
-                    }
-                }
-            }
-            this.categoria = result;
-        }
     }
 }

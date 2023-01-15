@@ -15,20 +15,21 @@
         <h2>Num. Participantes:</h2>
         <br>
         <h2>Empresa:</h2>
+        <br>
+        <h2>Categoria:</h2>
     </div>
-<ul style="display: flex; flex-wrap: nowrap; list-style-type: none;">
+<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; ">
     @foreach (var feira in IndexModel.feiras)
 {
 
-@Html.DisplayFor(modelItem => feira.getCategoriaNome)
-
-    @*@var categoria = Model.getCategoriaNome(feira);*@
-    <li style="margin-right:70px; display: flex; flex-direction: column;">
+    <li style="margin-right:100px; display: flex; flex-direction: column;">
         <h2>@feira.nomeFeira</h2>
         <br>
         <h2>@feira.numParticipantes</h2>
         <br>
-        <h2>Categoria: @categoria</h2>
+        <h2> @Model.getEmpresaNome(feira)</h2>
+        <br>
+        <h2> @Model.getCategoriaNome(feira)</h2>
         <br>
         <button style="color: black; background-color: white; 
                     border: 1px solid #E9AE0C;
