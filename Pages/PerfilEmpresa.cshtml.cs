@@ -17,6 +17,8 @@ namespace EZFair.Pages
         public static List<Feira> feiras = new List<Feira>();
         public void OnGet()
         {
+            feiras.Clear();
+
             var user = User.Identity;
 
             connection.Open();
