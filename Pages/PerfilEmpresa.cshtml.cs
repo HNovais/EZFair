@@ -49,9 +49,8 @@ namespace EZFair.Pages
                         string nomeFeira = reader.GetString(1);
                         DateTime inicio = reader.GetDateTime(2);
                         DateTime fim = reader.GetDateTime(3);
-                        int numParticipantes = reader.GetInt32(4);
 
-                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim, numParticipantes);
+                        Feira newFeira = new Feira(idEmpresa, nomeFeira, inicio, fim);
                         feiras.Add(newFeira);
                     }
                 }
