@@ -37,8 +37,10 @@ namespace EZFair.Pages
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, Username));
                 identity.AddClaim(new Claim(ClaimTypes.Name, Username));
-                identity.AddClaim(new Claim(ClaimTypes.Role, "Cliente"));
-
+                if(Username == "admin")
+                    identity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+                else
+                    identity.AddClaim(new Claim(ClaimTypes.Role, "Cliente"));
                 // Set the forms authentication ticket
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 

@@ -14,6 +14,17 @@
     </div>
 </div>
 
+<hi>Feiras</hi>
+<ul>
+    @foreach (var feira in PerfilEmpresaModel.feiras)
+    {
+        <li>
+            <h2>@feira.nomeFeira</h2>
+            <button onclick="location.href='/Feira/@feira.nomeFeira'">Feira</button>
+        </li>
+    }
+</ul>
+
 <style>
     body {
         background-color: #121212;
