@@ -18,7 +18,7 @@
     <br>
     <div class="form-group">
         <label asp-for="Name" style="color:white; margin-left: 50px;">Nome Empresa</label>
-        <input asp-for="Name" class="form-control" style="margin-left: 50px;" />
+        <input asp-for="Name" required class="form-control" style="margin-left: 50px;" />
         <span asp-validation-for="Name" class="text-danger"></span>
         @if (TempData["ErrorMessage"] != null)
         {
@@ -31,14 +31,14 @@
     <br>
     <div class="form-group">
         <label asp-for="Email" style="color:white; margin-left: 50px;" >Email</label>
-        <input asp-for="Email" class="form-control" style="margin-left: 50px;" />
+        <input asp-for="Email" required class="form-control" style="margin-left: 50px;" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <br>
     <br>
     <div class="form-group">
         <label asp-for="NIPC" style="color:white; margin-left: 50px;" >Número de Identificação de Pessoa Coletiva (NIPC)</label>
-        <input asp-for="NIPC" class="form-control" style="margin-left: 50px;" />
+        <input asp-for="NIPC" required class="form-control" style="margin-left: 50px;" />
         <span asp-validation-for="NIPC" class="text-danger"></span>
         
     </div>
@@ -46,7 +46,7 @@
     <br>
     <div class="form-group">
         <label asp-for="Password" style="color:white; margin-left: 50px;" >Password</label>
-        <input asp-for="Password" type="password" class="form-control" style="margin-left: 50px;" />
+        <input asp-for="Password" required type="password" class="form-control" style="margin-left: 50px;" />
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <br>
