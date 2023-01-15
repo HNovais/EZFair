@@ -27,7 +27,6 @@ namespace EZFair.Pages
 
         public String Categoria { get; set; }
 
-
         public IActionResult OnGet()
         {
             return Page();

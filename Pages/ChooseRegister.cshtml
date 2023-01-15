@@ -64,24 +64,24 @@
     <div class="login-option">
         <input type="radio" id="empresa" name="tipo" value="empresa" style="display: none;">
         <a href="@Url.Content("~/RegistoEmpresa")"  style="font-size:60px; color: white; text-shadow: 1px 1px 0px black;">
-<label for="empresa" onclick="redirectToLoginEmpresa()">Empresa</label>
+<label for="empresa" onclick="redirectToRegistoEmpresa()">Empresa</label>
 </a>
         </div>
         <div class="login-option">
             <input type="radio" id="cliente" name="tipo" value="cliente" style="display: none;">
             <a href="@Url.Content("~/RegistoCliente")"  style="font-size:60px; color: white; text-shadow: 1px 1px 0px black;">
-                <label for="cliente" onclick="redirectToLoginCliente()">Cliente</label>
+                <label for="cliente" onclick="redirectToRegistoCliente()">Cliente</label>
             </a>
         </div>
     </div>
 
  
    <script>
-        function redirectToLoginCliente(){
-            window.location.href = "@Url.Content("~/LoginCliente")";
+        function redirectToRegistoCliente(){
+            window.location.href = "@Url.Content("~/RegistoCliente")";
         }
-        function redirectToLoginEmpresa() {
-            window.location.href = "@Url.Content("~/LoginEmpresa")";
+        function redirectToRegistoEmpresa() {
+            window.location.href = "@Url.Content("~/RegistoEmpresa")";
         }
     </script>
 
