@@ -21,6 +21,7 @@ namespace EZFair.Pages
         public int numParticipantes { get; set; }
         public string descricao { get; set; }
         public string email { get; set; }
+        public string estado { get; set; }
 
         public int idCategoria { get; set; }
         public string categoria { get; set; }
@@ -33,7 +34,11 @@ namespace EZFair.Pages
         {
             produtos.Clear();
             getFeira(nomeFeira);
-            getAnuncios();
+
+            if (feira.estado == "Terminada")
+                deleteAnuncios();
+            else
+                getAnuncios();
         }
 
         private void getFeira(string nomeFeira)
@@ -45,7 +50,7 @@ namespace EZFair.Pages
                 command.Connection = connection;
 
                 // First query
-                command.CommandText = "SELECT empresa, dataInicio, dataFim, numParticipantes, descricao, categoria FROM Feira WHERE nomeFeira = @nomeFeira";
+                command.CommandText = "SELECT empresa, dataInicio, dataFim, estado, descricao, categoria FROM Feira WHERE nomeFeira = @nomeFeira";
                 command.Parameters.AddWithValue("@nomeFeira", nomeFeira);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -55,12 +60,12 @@ namespace EZFair.Pages
                         FeiraModel.nomeFeira = nomeFeira;
                         this.inicio = reader.GetDateTime(1);
                         this.final = reader.GetDateTime(2);
-                        this.numParticipantes = reader.GetInt32(3);
+                        this.estado = reader.GetString(3);
                         this.descricao = reader.GetString(4);
                         this.idCategoria = reader.GetInt32(5);
                     }
 
-                    feira = new Feira(idEmpresa, nomeFeira, inicio, final, numParticipantes, descricao);
+                    feira = new Feira(idEmpresa, nomeFeira, inicio, final, estado, descricao);
                     reader.Close();
 
                     using (SqlCommand command2 = new SqlCommand("SELECT nomeEmpresa, email FROM Empresa WHERE idEmpresa = @idEmpresa", connection))
@@ -126,6 +131,25 @@ namespace EZFair.Pages
                     }
                 }
             }
+
+            connection.Close();
+        }
+
+        private void deleteAnuncios()
+        {
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = connection;
+
+                command.CommandText = "DELETE FROM Produto\r\nWHERE Produto.idProduto IN (\r\n   SELECT Produto \r\n   FROM Anuncio \r\n   WHERE Feira = (SELECT idFeira FROM Feira WHERE idFeira = @feiraId)\r\n);\r\n\r\nDELETE FROM Anuncio\r\nWHERE Feira = @feiraId;";
+                command.Parameters.AddWithValue("@feiraID", idFeira);
+                command.ExecuteNonQuery();
+                
+            }
+
+            connection.Close();
         }
 
         [HttpPost]
