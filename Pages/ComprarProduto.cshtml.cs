@@ -16,6 +16,18 @@ namespace EZFair.Pages
 
         private static int produto;
         private static string feira;
+
+        public int NumeroCartaoCredito { get; set; }
+        public int CCV { get; set; }
+        
+        public int NIF { get; set; }
+        public string EndereçodeFaturacao { get; set; }
+        public string EndereçodeEntrega { get; set; }
+        public string NomeCartaoCredito { get; set; }
+        public string Validade { get; set; }
+
+
+        public int PhoneNumber { get; set; }
         private static Produto prod{ get; set; }
 
         public void OnGet(string nomeFeira, int idProduto)

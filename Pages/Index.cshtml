@@ -5,35 +5,36 @@
 }
 
 <br>
+
 <h1 style="text-align: center; color: #DEA402; font-size: 4em; text-shadow: 1px 1px 0px white;">EZFair</h1>
 <br>
 <br>
-<div style="color: white; display: flex; flex-wrap: nowrap;">
-    <div style="display: flex; flex-direction: column;">
-        <h2>Nome:</h2>
+
+<center><h1 style="color: #DEA402; text-shadow: 1px 1px 0px white;">Feiras a Decorrer</h1></center>
+
+<br><br><br>
+
+<div style="color: white; display: flex; flex-wrap: nowrap; margin-left: 0px !important;  ">
+    <div style="display: flex; flex-direction: column; float: left; margin-left: 0px; ">
+        <h2 style="color: #b2b2b2;">Nome:</h2>
         <br>
-        <h2>Num. Participantes:</h2>
+        <h2 style="color: #b2b2b2;">Empresa:</h2>
         <br>
-        <h2>Empresa:</h2>
-        <br>
-        <h2>Categoria:</h2>
+        <h2 style="color: #b2b2b2;">Categoria:</h2>
     </div>
 
-<h1>Feiras a Decorrer</h1>
 
-<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; ">
+<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; margin-top: -130px;">
     @foreach (var feira in IndexModel.feiras)
 {
     <li style="margin-right:100px; display: flex; flex-direction: column;">
         <h2>@feira.nomeFeira</h2>
         <br>
-        <h2>@feira.numParticipantes</h2>
-        <br>
         <h2> @Model.getEmpresaNome(feira)</h2>
         <br>
         <h2> @Model.getCategoriaNome(feira)</h2>
         <br>
-        <form method="post">
+        <form method="post">    
                     <button type="submit" class="btn btn-primary" asp-page-handler="Escolher" asp-route-estado="@feira.estado" asp-route-idFeira="@feira.idFeira" asp-route-nomeFeira="@feira.nomeFeira"
                             style="color: black; background-color: white; 
                             border: 1px solid #E9AE0C;
@@ -50,18 +51,27 @@
 </ul>
 </div>
 
-<h1>Feiras em Breve</h1>
-<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; ">
+<center><h1 style="color: #DEA402; text-shadow: 1px 1px 0px white;">Feiras em Breve</h1></center><br>
+
+<div style="color: white; display: flex; flex-wrap: nowrap;">
+    <div style="display: flex; flex-direction: column;">
+        <h2 style="color: #b2b2b2;">Nome:</h2>
+        <br>
+        <h2 style="color: #b2b2b2;">Empresa:</h2>
+        <br>
+        <h2 style="color: #b2b2b2;">Categoria:</h2>
+    </div>
+
+
+<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; margin-top: -130px;">
     @foreach (var feira in IndexModel.feirasBrevemente)
 {
     <li style="margin-right:100px; display: flex; flex-direction: column;">
-        <h2>@feira.nomeFeira</h2>
+        <h2 style="color: white;">@feira.nomeFeira</h2>
+                <br>
+        <h2 style="color: white;"> @Model.getEmpresaNome(feira)</h2>
         <br>
-        <h2>@feira.numParticipantes</h2>
-        <br>
-        <h2> @Model.getEmpresaNome(feira)</h2>
-        <br>
-        <h2> @Model.getCategoriaNome(feira)</h2>
+        <h2 style="color: white;"> @Model.getCategoriaNome(feira)</h2>
         <br>
          <form method="post">
                     <button type="submit" class="btn btn-primary" asp-page-handler="Escolher" asp-route-estado="@feira.estado" asp-route-idFeira="@feira.idFeira" asp-route-nomeFeira="@feira.nomeFeira"
@@ -74,25 +84,36 @@
                     </button>
                 </form>
         <br>
-        <h2>Começa a @feira.dataInicio</h2>
+        <h2 style="color: white; ">Começa a @feira.dataInicio.ToString("dd/MM/yyyy")</h2>
     </li>
 }
 </ul>
+</div>
 
-<h1>Feiras Terminadas</h1>
-<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; ">
+<center><h1 style="color: #DEA402; text-shadow: 1px 1px 0px white;">Feiras Terminados</h1></center><br><br>
+
+
+<div style="color: white; display: flex; flex-wrap: nowrap;">
+    <div style="display: flex; flex-direction: column;">
+        <h2 style="color: #b2b2b2;">Nome:</h2>
+        <br>
+        <h2 style="color: #b2b2b2;">Empresa:</h2>
+        <br>
+        <h2 style="color: #b2b2b2;">Categoria:</h2>
+    </div>
+
+
+<ul style="display: flex; flex-wrap: nowrap; list-style-type: none; padding: 10%; margin-top: -130px;">
     @foreach (var feira in IndexModel.feirasTerminadas)
 {
     <li style="margin-right:100px; display: flex; flex-direction: column;">
         <h2>@feira.nomeFeira</h2>
         <br>
-        <h2>@feira.numParticipantes</h2>
-        <br>
         <h2> @Model.getEmpresaNome(feira)</h2>
         <br>
         <h2> @Model.getCategoriaNome(feira)</h2>
         <br>
-         <form method="post">
+        <form method="post">
                     <button type="submit" class="btn btn-primary" asp-page-handler="Escolher" asp-route-estado="@feira.estado" asp-route-idFeira="@feira.idFeira" asp-route-nomeFeira="@feira.nomeFeira"
                             style="color: black; background-color: white; 
                             border: 1px solid #E9AE0C;
@@ -103,10 +124,11 @@
                     </button>
                 </form>
         <br>
-        <h2>Terminou a @feira.dataFinal</h2>
+        
     </li>
 }
 </ul>
+
 
 <style>
     body {

@@ -20,6 +20,8 @@ namespace EZFair.Pages
         public static float preco { get; set; }
 
         private static string feira;
+
+        public List<Produto> p;
         public void OnGet(string nomeFeira, int idProduto)
         {
             AnuncioModel.produto = idProduto;
