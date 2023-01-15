@@ -40,15 +40,15 @@ namespace EZFair.Pages
         {
             //if (ImageFile != null && ImageFile.Length > 0)
             //{
-               //using (var stream = new MemoryStream())
-               
-                    //ImageFile.CopyTo(stream);
-                    //var image = stream.ToArray();
+            //using (var stream = new MemoryStream())
 
-                    Produto produto = new Produto(Stock, Price, Name);
-                    int idProduto = AdicionarProduto(produto, idFeira);
+            //ImageFile.CopyTo(stream);
+            //var image = stream.ToArray();
+            Produto produto = new Produto(Stock, Price, Name);
 
-                    return RedirectToPage("Anuncio", new { nomeFeira, idProduto });
+            int idProduto = AdicionarProduto(produto, idFeira);
+
+            return RedirectToPage("Anuncio", new { nomeFeira, idProduto });
                 //}
             //}
             //else
@@ -84,7 +84,7 @@ namespace EZFair.Pages
                 Console.WriteLine(anuncio.feira);
 
                 //Third query
-                command.CommandText = "INSERT INTO Anuncio (produto, feira-) VALUES (@produto, @feira)";
+                command.CommandText = "INSERT INTO Anuncio (produto, feira) VALUES (@produto, @feira)";
                 command.Parameters.AddWithValue("@produto", anuncio.produto);
                 command.Parameters.AddWithValue("@feira", anuncio.feira);
                // command.Parameters.AddWithValue("@imagem", image);
