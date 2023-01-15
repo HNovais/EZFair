@@ -4,16 +4,28 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <a asp-page="/PerfilCliente">Perfil Cliente</a>
-</div>
-
-<ul>
+<br>
+<h1 style="text-align: center; color: #DEA402; font-size: 4em; text-shadow: 1px 1px 0px white;">EZFair</h1>
+<br>
+<br>
+<ul style="color: white; display: flex; flex-wrap: nowrap; list-style-type: none;">
     @foreach (var feira in IndexModel.feiras)
     {
-        <li>
+        <li style="margin-right:70px">
             <h2>@feira.nomeFeira</h2>
-            <button onclick="location.href='/Feira/@feira.nomeFeira'">Feira</button>
+            <br>
+            <button style="color: black; background-color: white; 
+                        border: 1px solid #E9AE0C;
+                        transition: background-color 0.2s ease-in-out;"
+                onmouseover="this.style.backgroundColor='#E9AE0C'" 
+                onmouseout="this.style.backgroundColor='white'" 
+                onclick="location.href='/Feira/@feira.nomeFeira'"> Ver Feira</button>
         </li>
     }
 </ul>
+
+<style>
+    body {
+        background-color: #121212;
+    }
+</style>
