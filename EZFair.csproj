@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Carrinho.cshtml.cs" />
     <Compile Remove="Pages\Produto.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Carrinho.cshtml" />
     <Content Remove="Pages\Produto.cshtml" />
     <Content Remove="wwwroot\Images\profile.png" />
   </ItemGroup>
