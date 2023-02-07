@@ -73,15 +73,22 @@
     </div>
     <br>
     <div style="text-align:center;">
-   <a href="@Url.Content("~/ThankYou")" class="button btn btn-primary" style="background-color: #DEA402;
-                                                                color: white;
-                                                                padding: 15px 15px;
-                                                                text-decoration: none;
-                                                                display: inline-block;
-                                                                font-size: 35px;
-                                                                margin: 4px 2px;
-                                                                border: 1px solid white;
-                                                                cursor: pointer;"> Comprar </a>
+        <form method="post">
+            <div style="text-align:center;">
+                <button type="submit" class="btn btn-primary" asp-page-handler="ConfirmarCompra"
+                    style="background-color: #DEA402;
+                       color: white;
+                       padding: 15px 15px;
+                       text-decoration: none;
+                       display: inline-block;
+                       font-size: 35px;
+                       margin: 4px 2px;
+                       border: 1px solid white;
+                       cursor: pointer;">
+                    COMPRAR
+                </button>
+            </div>
+        </form>
 
 
     <!-- <button type="submit" class="button btn btn-primary" style="background-color: #DEA402;

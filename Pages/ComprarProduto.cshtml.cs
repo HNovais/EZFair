@@ -67,13 +67,15 @@ namespace EZFair.Pages
         }
 
         [HttpPost]
-        public void OnPostConfirmarCompra()
+        public RedirectToPageResult OnPostConfirmarCompra()
         {
             prod.stock--;
             if (prod.stock == 0)
                 deleteProduto();
             else
                 changeStock(prod.stock, produto);
+
+            return RedirectToPage("~/ThankYou");
         }
 
         private void deleteProduto()
