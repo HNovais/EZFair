@@ -75,7 +75,7 @@ namespace EZFair.Pages
             else
                 changeStock(prod.stock, produto);
 
-            return RedirectToPage("~/ThankYou");
+            return RedirectToPage("ThankYou");
         }
 
         private void deleteProduto()
